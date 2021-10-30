@@ -1,0 +1,15 @@
+<app-inner-header [modulo]="'labelChat'" [background]="'bg-default'"></app-inner-header>
+<div class="container-fluid mt--6">
+	<div class="row">
+		<div class="col-lg-4">
+			<app-card-users-list (userChatSelected)="enableChat($event)">
+			</app-card-users-list>
+		</div>
+		<div class="col-lg-8">
+			<app-card-users-chat
+				[chatUser]="chatUserSelected"
+				[showPanel]="showPanelChat"
+				(hidePanel)="disableChat($event)"></app-card-users-chat>
+		</div>
+	</div>
+</div>

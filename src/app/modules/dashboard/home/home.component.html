@@ -1,0 +1,7 @@
+<app-sidebar (navCollapse)="navbarCollapse($event)"></app-sidebar>
+<div class="main-content" id="panel" [class.navbarcollapse]="!collapse" [class.navbaruncollapse]="collapse">
+	<app-topbar></app-topbar>
+	<!-- Router View -->
+	<router-outlet></router-outlet>
+	<!-- end Router View-->
+</div>

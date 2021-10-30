@@ -1,0 +1,85 @@
+<app-alert [response]="" [error]="error"></app-alert>
+<form>
+	<div class="row">
+		<div class="col-lg-5">
+			<div class="box-body">
+				<div class="form-group" *ngIf="!isUpdate">
+					<label class="form-control-label">Modulo Terminal</label>
+					<select name="tipo" class="form-control" (change)="onSelectModule($event)">
+						<option value="0" selected="selected">Selecciona tu modulo</option>
+						<option [value]="option.record.id" *ngFor="let option of terminalInfo | modulefilter; let i = index">{{option.module}}</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<div *ngIf="isUpdate; then showUpdate else showCreate"></div>
+					<ng-template #showUpdate>
+						<button class="btn btn-primary btn-block pull-right" [disabled]="selectedModule === 'Modulo Terminal' || saving" (click)="updateModuleTerminal()">{{btnUpdateModule}}</button>
+					</ng-template>
+					<ng-template #showCreate>
+						<button class="btn btn-primary pull-right" [disabled]="selectedModule === 'Modulo Terminal' || saving" (click)="createModuleTerminal()">{{btnCreateModule}}</button>
+					</ng-template>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-7">
+			<div class="card">
+				<div class="card-header">
+					<h5 class="h3 mb-0">Configuracion de Terminal</h5>
+					<small class="text-muted"><i class="fa fa-info"></i> Configura las opciones generales de tu
+						terminal.</small>
+				</div>
+				<div class="card-body">
+					<form [formGroup]="frmTerminalConfig">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="custom-switch mb-3">
+									<input class="custom-control-input" formControlName="photo" id="foto" type="checkbox">
+									<label class="custom-control-label" for="foto">Registrar Foto</label>
+								</div>
+								<div class="custom-switch mb-3">
+									<input class="custom-control-input" formControlName="temperatura" id="temperatura" type="checkbox">
+									<label class="custom-control-label" for="temperatura">Temperatura</label>
+								</div>
+								<div class="custom-switch mb-3">
+									<input class="custom-control-input" formControlName="sintomas" id="sintomas" type="checkbox">
+									<label class="custom-control-label" for="sintomas">Sintomas</label>
+								</div>
+								<div class="custom-switch mb-3">
+									<input class="custom-control-input" formControlName="datosvisitantes" id="datosvisitantes" type="checkbox">
+									<label class="custom-control-label" for="datosvisitantes">Datos de
+										Visitantes</label>
+								</div>
+								<div class="custom-switch mb-3">
+									<input class="custom-control-input" formControlName="status" id="status" type="checkbox">
+									<label class="custom-control-label" for="status">Activa</label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="custom-switch mb-3">
+									<input class="custom-control-input" formControlName="modoqr" id="modoqr" type="checkbox">
+									<label class="custom-control-label" for="modoqr">Modo Lectura</label>
+								</div>
+								<div class="custom-switch mb-3">
+									<input class="custom-control-input" formControlName="cursos" id="cursos" type="checkbox">
+									<label class="custom-control-label" for="cursos">Cursos</label>
+								</div>
+								<div class="custom-switch mb-3">
+									<input class="custom-control-input" formControlName="eps" id="eps" type="checkbox">
+									<label class="custom-control-label" for="eps">EPS</label>
+								</div>
+								<div class="custom-switch mb-3">
+									<input class="custom-control-input" formControlName="arl" id="validatearl" type="checkbox">
+									<label class="custom-control-label" for="validatearl">Valida ARL</label>
+								</div>
+								<div class="custom-switch mb-3">
+									<input class="custom-control-input" formControlName="ruta" id="ruta" type="checkbox">
+									<label class="custom-control-label" for="ruta">Ruta</label>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

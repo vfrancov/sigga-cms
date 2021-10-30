@@ -1,0 +1,57 @@
+<div class="card">
+	<div class="card-header">
+		<div class="row align-items-center">
+			<div class="col">
+				<h3 class="mb-0">Personal</h3>
+			</div>
+			<div class="col text-right">
+				<button class="btn btn-danger btn-sm" (click)="closePersonalList()">
+					<i class="fa fa-times"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="card-header py-0">
+		<form class="ng-pristine ng-valid">
+			<div class="form-group mb-0">
+				<div class="input-group input-group-lg input-group-flush">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<span class="fas fa-search"></span>
+						</div>
+					</div>
+					<input ng-model="searchPersonal" type="search"
+						class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="Buscar personal">
+				</div>
+			</div>
+		</form>
+	</div> -->
+	<div class="card-body customScroll">
+		<ul class="list-group list-group-flush list my--3">
+			<li class="list-group-item px-0" *ngFor="let row of authorizerList">
+				<div class="row align-items-center">
+					<div class="col-auto">
+						<a href="#" class="avatar rounded-circle">
+							<img alt="Image placeholder" src="./assets/img/empleado.png">
+						</a>
+					</div>
+					<div class="col ml--2">
+						<h4 class="mb-0">
+							<a href="javascript:">{{row.firstName}} {{row.lastName}}</a>
+						</h4>
+						<span class="text-{{(row.numberDevice !== null) ? 'success' : 'danger'}}">● </span>
+						<small>{{(row.numberDevice !== null) ? 'Registrado' : 'No Registrado'}}</small>
+					</div>
+					<div class="col-auto">
+						<div *ngIf="row.numberDevice !== null">
+							<div class="custom-control custom-checkbox custom-checkbox-success">
+								<input id="{{row.id}}" class="custom-control-input" type="checkbox" (click)="setUsersId(row)">
+								<label for="{{row.id}}" class="custom-control-label"></label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>

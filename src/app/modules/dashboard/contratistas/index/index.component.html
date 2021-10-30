@@ -1,0 +1,31 @@
+<app-inner-header [modulo]="'labelContratistas'" [background]="'bg-miscontratistas'"></app-inner-header>
+<div class="container-fluid mt--6">
+	<app-card-detalle-contratistas (visitsContratistas)="modalVisitContratistas($event)" (visitsContratistasIO)="modalVisitContratistasIO($event)"></app-card-detalle-contratistas>
+	<div class="row">
+		<div class="col-lg-4">
+			<app-card-empresas-contratistas></app-card-empresas-contratistas>
+		</div>
+		<div class="col-lg-4" *ngIf="state.name !== 'create' && state.name !== 'createcontratista'">
+			<app-card-contratista-detalles></app-card-contratista-detalles>
+		</div>
+		<div class="col-lg-4" *ngIf="state.show && state.name === 'create'">
+			<app-card-create-contratista></app-card-create-contratista>
+		</div>
+		<div class="col-lg-8" *ngIf="state.name === 'createcontratista'">
+			<app-card-add-member></app-card-add-member>
+		</div>
+		<div class="col-lg-4" *ngIf="state.name !== 'createcontratista'">
+			<app-card-contratistas-members></app-card-contratistas-members>
+		</div>
+	</div>
+</div>
+
+<app-modal-container [modalId]="'modal-contratistas-visits'" [modalTitle]="'Resumen de Contratistas'"
+	[modalShow]="modalContratistasVisits" (modalHide)="modalVisitContratistas($event)">
+	<app-card-visit-contratistas></app-card-visit-contratistas>
+</app-modal-container>
+
+<app-modal-container [modalId]="'modal-contratistas-io'" [modalTitle]="'Resumen de Entradas/Salidas'"
+	[modalShow]="modalContratistasIO" (modalHide)="modalVisitContratistasIO($event)">
+	<app-card-io-contratistas></app-card-io-contratistas>
+</app-modal-container>

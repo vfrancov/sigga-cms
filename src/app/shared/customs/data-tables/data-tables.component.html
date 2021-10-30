@@ -1,0 +1,10 @@
+<div class="table-responsive customScroll setScroll">
+	<table class="table align-items-center table-flush">
+		<thead class="thead-light">
+			<tr>
+				<th *ngFor="let name of header">{{name}}</th>
+			</tr>
+		</thead>
+		<ng-content></ng-content>
+	</table>
+</div>

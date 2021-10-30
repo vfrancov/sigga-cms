@@ -1,0 +1,58 @@
+<nav class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white"
+  [class.g-sidenav-pinned]="valueEmit" id="sidenav-main">
+  <div class="scrollbar-inner">
+    <div class="sidenav-header d-flex align-items-center">
+      <a class="navbar-brand" [routerLink]="['/dashboard/home/empleados']">
+        <img src="./assets/img/sigga-logo-2.png" class="navbar-brand-img">
+      </a>
+      <div class="ml-auto" (click)="collapseNavbar()">
+        <div class="sidenav-toggler d-none d-xl-block">
+          <div class="sidenav-toggler-inner">
+            <i class="sidenav-toggler-line"></i>
+            <i class="sidenav-toggler-line"></i>
+            <i class="sidenav-toggler-line"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navbar-inner">
+      <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+        <ul class="navbar-nav">
+          <li *ngFor="let option of userMenu">
+            <div *ngIf="option.subMenuItem.length > 0; then showSubOptions else showItem"></div>
+            <ng-template #showSubOptions>
+              <a class="nav-link" [class.collapsed]="!subMenuOptions" href="javascript:" (click)="showSubMenuOptions()"
+                data-toggle="collapse" role="button" [attr.aria-expanded]="subMenuOptions" aria-controls="reportes">
+                <i class="{{option.icon}} {{option.color}}"></i>
+                <span class="nav-link-text">{{ "menu" | localization : option.id }}</span>
+              </a>
+              <div id="reportes" class="collapse" [class.show]="subMenuOptions">
+                <ul class="nav nav-sm flex-column">
+                  <li class="nav-item" *ngFor="let subitem of option.subMenuItem">
+                    <a [routerLink]="subitem.route" class="nav-link">{{subitem.name}}</a>
+                  </li>
+                </ul>
+              </div>
+            </ng-template>
+            <ng-template #showItem>
+              <a class="nav-link" [routerLink]="option.route">
+                <i class="{{option.icon}} {{option.color}}"></i>
+                <span class="nav-link-text">{{ "menu" | localization : option.id }}</span>
+              </a>
+            </ng-template>
+          </li>
+        </ul>
+        <hr class="my-3">
+        <h6 class="navbar-heading p-0 text-muted">Mas Opciones</h6>
+        <ul class="navbar-nav mb-md-3">
+          <li class="nav-item">
+            <a href="javascript:" class="nav-link" (click)="logout()">
+              <i class="ni ni-button-power"></i>
+              <span class="nav-link-text">Desconectarme</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

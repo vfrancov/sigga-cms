@@ -1,0 +1,101 @@
+<div class="card">
+    <div class="card-header">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="mb-0">Registro de publicaciones <span class="badge badge-info">{{dataPublish.length}}</span></h3>
+            </div>
+            <div class="col text-right">
+                <button class="btn btn-info btn-sm"><i class="fa fa-search"></i></button>
+                <!-- <button class="btn btn-danger btn-sm ng-hide" ng-show="showSearchOption" ng-click="disableShowOption()"><i class="fa fa-times"></i></button> -->
+                <button class="btn btn-sm btn-primary" (click)="enablePublish()">Publicar</button>
+                <a id="publications-to-excel" href="javascript:" class="btn btn-sm btn-success"><i class="fas fa-file-excel"></i></a>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="card-header py-0 ng-hide" ng-show="showSearchOption">
+        <form class="ng-pristine ng-valid">
+            <div class="form-group mb-0">
+                <div class="input-group input-group-lg input-group-flush">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span class="fas fa-search"></span>
+                        </div>
+                    </div>
+                    <input ng-model="searchPublicacion" type="search" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="Buscar resolucion">
+                </div>
+            </div>
+        </form>
+    </div> -->
+    <div class="table-responsive customScroll" [class.setScroll]="dataPublish.length > 5">
+        <div class="table-responsive">
+            <table id="table-publications" class="table align-items-center table-flush">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col" class="sort">Nombre</th>
+                        <th scope="col" class="sort">Descripcion</th>
+                        <th scope="col" class="sort">Tipo</th>
+                        <th scope="col" class="sort">Fecha Publicación</th>
+                        <th scope="col" class="sort noExl">Archivo</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody class="list">
+					<tr *ngIf="dataPublish.length === 0">
+						<td colspan="6" class="text-center">No hay publicaciones que mostrar</td>
+					</tr>
+                    <tr *ngFor="let row of dataPublish">
+                        <th scope="row">
+                            <span class="name mb-0 text-sm">{{row.name}}</span>
+                        </th>
+                        <td class="budget">{{row.description}}</td>
+                        <td>{{row.typePublicationName}}</td>
+                        <td>{{row.datePublication}}</td>
+                        <td class="noExl">
+                            <div class="avatar-group text-center">
+                                <a href="{{row.urlFile}}" class="btn btn-info btn-sm" target="blank">
+                                    <i class="fas fa-file-pdf"></i>
+                                </a>
+                            </div>
+                        </td>
+                        <td class="text-right noExl">
+                            <!-- <div class="dropdown" ng-show="optionDeleteEnable != rows.id_sg_publicacion">
+                                <a class="btn btn-sm btn-icon-only text-primary" href="javascript:" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                    <a class="dropdown-item" href="javascript:">Editar</a>
+                                    <a class="dropdown-item" href="javascript:" ng-click="showOptionDelete(rows.id_sg_publicacion)">Eliminar</a>
+                                </div>
+                            </div> -->
+                            <!-- <div ng-hide="optionDeleteEnable != rows.id_sg_publicacion" class="ng-hide">
+                                <button class="btn btn-sm btn-danger" ng-click="deleteProcessPublicacion(rows.id_sg_publicacion)" ng-disabled="btnDeletePublicacion != 'Borrar'">Borrar</button>
+                                <button class="btn btn-sm btn-warning" ng-click="cancelProcess()">Cancelar</button>
+                            </div> -->
+                        </td>
+					</tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer py-4">
+        <nav aria-label="...">
+            <ul class="pagination justify-content-end mb-0">
+                <li class="page-item disabled" ng-class="{'disabled' : pageNumber == 1 }">
+                    <a class="page-link" href="javascript:" tabindex="-1" ng-click="prevStep()">
+                        <i class="fas fa-angle-left"></i>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item active" ng-class="{'active' : pageNumber == totalPages }" ng-repeat="page in range(pageNumber,totalPages)">
+                    <a class="page-link" href="javascript:">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="javascript:" ng-click="nextStep()">
+                        <i class="fas fa-angle-right"></i>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

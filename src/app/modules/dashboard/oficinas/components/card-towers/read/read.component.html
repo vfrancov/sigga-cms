@@ -1,0 +1,90 @@
+<div class="card">
+	<div class="card-header">
+		<div class="row align-items-center">
+			<div class="col">
+				<h5 class="h3 mb-0">Mis Torres</h5>
+				<small class="text-muted"><i class="fa fa-info"></i> Relación de las torres de tu Empresa ó
+					Unidad</small>
+			</div>
+			<div class="col text-right">
+				<button class="btn btn-sm btn-warning" (click)="cancelAddTorre()"
+					[hidden]="hideCancelTorre">Cancelar</button>
+				<button class="btn btn-sm btn-primary" (click)="showFormTorre()">Crear Torre</button>
+				<button class="btn btn-sm btn-danger" (click)="closeTorre()"><i class="fa fa-times"></i></button>
+			</div>
+		</div>
+	</div>
+	<!-- searcher -->
+	<!-- <div class="card-header py-0" ng-hide="enableFormTorre">
+		<form action="javascript:" method="post" autocomplete="off" class="ng-pristine ng-valid">
+			<div class="form-group mb-0">
+				<div class="input-group input-group-lg input-group-flush">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<span class="fas fa-search"></span>
+						</div>
+					</div>
+					<input ng-model="searchTorre" type="search"
+						class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="Buscar"
+						ng-disabled="!loadDataResource" disabled="disabled">
+				</div>
+			</div>
+		</form>
+	</div> -->
+	<!-- end searcher -->
+	<div class="card-body customScroll" [class.setScroll]="resumeTowers.length > 5">
+		<div [hidden]="enableFormTorre">
+			<ul class="list-group list-group-flush list my--3">
+				<div *ngIf="resumeTowers.length === 0; then showEmpty else showTowers"></div>
+				<ng-template #showEmpty>
+					<li class="list-group-item px-0 hover">
+						<div class="row d-flex justify-content-center">
+							<p>No hay torres registradas, has click en <span class="badge badge-primary point"
+									(click)="showFormTorre()">Añadir Torre</span></p>
+						</div>
+					</li>
+				</ng-template>
+				<ng-template #showTowers>
+					<li class="list-group-item px-0 hover" *ngFor="let row of resumeTowers">
+						<div class="row align-items-center" (click)="setSelectedTower(row)"
+							*ngIf="selectedTowerDelete !== row.id">
+							<div class="col-auto">
+								<a href="javascript:" class="avatar rounded-circle">
+									<img src="./assets/img/oficinas.png">
+								</a>
+							</div>
+							<div class="col ml--2">
+								<h4 class="mb-0">
+									<a href="javascript:">{{row.name}}</a>
+								</h4>
+								<span class="text-success">●</span>
+								<small> {{row.statusName}}</small>
+							</div>
+							<div class="col text-right mr-3">
+								<div *ngIf="selectedTower  === row.id">
+									<button class="btn btn-sm btn-danger" (click)="setSelectedTowerDelete(row)"><i
+											class="fa fa-trash"></i></button>
+								</div>
+							</div>
+						</div>
+						<div class="row align-items-center" *ngIf="selectedTowerDelete === row.id">
+							<div class="col">
+								<div class="row alert alert-danger">
+									<div class="col-12 text-center mb-2"><span class="text-sm">Estas seguro de eliminar
+											esta
+											Torre ?</span></div>
+									<div class="col text-center">
+										<button class="btn btn-sm btn-danger" (click)="deleteTorre(row)">Si</button>
+									</div>
+									<div class="col text-center">
+										<button class="btn btn-sm btn-warning" (click)="cancelTorreDelete()">No</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ng-template>
+			</ul>
+		</div>
+	</div>
+</div>

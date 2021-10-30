@@ -1,0 +1,83 @@
+<div class="row">
+	<div class="col-xl-3 col-md-6">
+		<div class="card card-stats">
+			<div class="card-body">
+				<div class="row">
+					<div class="col">
+						<h5 class="card-title text-uppercase text-muted mb-0 text-sm">{{ "viewEmpleado" | localization : "labelMyCompanie" }}</h5>
+						<span class="h2 font-weight-bold mb-0">{{companieDetails?.name}}</span>
+					</div>
+				</div>
+				<!-- <p class="mb-0 text-sm">
+					<span class="text-nowrap">Estado</span>
+					<span class="text-info ml-2">Activa</span>
+				</p> -->
+				<p class="mt-3 mb-0 text-sm d-flex justify-content-right">
+					<a href="javascript:" class="btn btn-sm btn-primary ml-2" (click)="editarEmpresa()">{{ "viewEmpleado" | localization : "labelEditCompanie" }}</a>
+					<a href="javascript:" class="btn btn-sm btn-primary ml-2" (click)="editarSede()">Gestionar Sedes</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-md-6">
+		<div class="card card-stats">
+			<div class="card-body">
+				<div class="row">
+					<div class="col">
+						<h5 class="card-title text-uppercase text-muted mb-0">{{ "viewEmpleado" | localization : "labelMyEmployees" }}</h5>
+						<span class="h2 font-weight-bold mb-0">0</span>
+					</div>
+					<div class="col-auto">
+						<div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+							<i class="ni ni-badge"></i>
+						</div>
+					</div>
+				</div>
+				<p class="mt-3 mb-0 text-sm">
+					<a href="javascript:" class="btn btn-sm btn-primary" (click)="verMisEmpleados()">{{ "viewEmpleado" | localization : "labelInformeEmpleados" }}</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-md-6">
+		<div class="card card-stats">
+			<div class="card-body">
+				<div class="row">
+					<div class="col">
+						<h5 class="card-title text-uppercase text-muted mb-0">Total Actividades</h5>
+						<span class="h2 font-weight-bold mb-0">13</span>
+					</div>
+					<div class="col-auto">
+						<div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+							<i class="ni ni-bullet-list-67"></i>
+						</div>
+					</div>
+				</div>
+				<p class="mt-3 mb-0 text-sm">
+					<!-- <a href="javascript:" class="btn btn-sm btn-primary ml-2"
+						(click)="seeDetailsInOut()">Informe Actividades</a> -->
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-md-6">
+		<div class="card card-stats">
+			<div class="card-body">
+				<div class="row">
+					<div class="col">
+						<h5 class="card-title text-uppercase text-muted mb-0">{{companieDetails?.typePlanName}}</h5>
+						<span class="h2 font-weight-bold mb-0">$0.00</span>
+					</div>
+					<div class="col-auto">
+						<div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+							<i class="ni ni-money-coins"></i>
+						</div>
+					</div>
+				</div>
+				<p class="mt-3 mb-0 text-sm d-flex justify-content-left">
+					<span class="text-wrap">Paquete: tienes 300 actividades</span>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>

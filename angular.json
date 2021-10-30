@@ -17,6 +17,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "socket.io-client",
+              "angular-typesafe-reactive-forms-helper"
+            ],
             "outputPath": "dist/sigga-cms",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -28,9 +32,17 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/saga-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/popper.js/dist/umd/popper.min.js",
+							"node_modules/jquery/dist/jquery.min.js",
+							"src/assets/vendor/js-cookie/js.cookie.js",
+							"src/assets/js/argon.js",
+							"src/assets/js/demo.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -124,5 +136,8 @@
       }
     }
   },
-  "defaultProject": "sigga-cms"
+  "defaultProject": "sigga-cms",
+  "cli": {
+    "analytics": false
+  }
 }

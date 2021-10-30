@@ -1,0 +1,78 @@
+<div id="detalleintegrantes">
+	<div class="card">
+		<div class="card-header border-0">
+			<div class="row">
+				<div class="col">
+					<h3 class="mb-0">{{"viewOficina" | localization : "labelDetailsOfficeAndEmployee"}}</h3>
+					<small class="text-muted"><i class="fa fa-info"></i> {{ "viewOficina" | localization : "labelDetailInfo" }}</small>
+				</div>
+				<div class="col text-right">
+					<!-- <button class="btn btn-sm btn-info" ng-click="enableSearchOption()" ng-hide="enableSearch"><i class="fa fa-search"></i></button>
+					<button class="btn btn-sm btn-warning" ng-click="closeSearchOption()" ng-show="enableSearch"><i class="fa fa-search-minus"></i></button>
+					<button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-notification"><i class="fa fa-file-excel"></i></button> -->
+					<a href="javascript:" class="btn btn-sm btn-danger btn-round btn-icon" (click)="closeDetalleOficinas()"><span class="btn-inner--text"><i class="fa fa-times"></i></span></a>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="card-header py-0">
+			<form action="javascript:" method="post" autocomplete="off">
+				<div class="form-group mb-0">
+					<div class="input-group input-group-lg input-group-flush">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<span class="fas fa-search"></span>
+							</div>
+						</div>
+						<input ng-model="searchDataEmpleado" type="search" class="form-control" placeholder="Buscar" ng-disabled="!loadDataResource">
+					</div>
+				</div>
+			</form>
+		</div> -->
+		<div class="table-responsive customScroll" [class.setScroll]="dataEmployees.length > 5">
+			<table id="detalles-mis-oficinas" class="table align-items-center table-flush">
+				<thead class="thead-light">
+					<tr>
+						<th>Cédula</th>
+						<th>{{"viewOficina" | localization : "labelTableEmpleado"}}</th>
+						<th>Torre</th>
+						<th>Sede</th>
+						<th>Piso</th>
+						<th>{{"viewOficina" | localization : "labelNameOffice"}}</th>
+						<th>Área</th>
+						<th>Detalles</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- <tr ng-if="detalleOficinas.length == 0 && loadDetalleOficinas == false">
+						<td colspan="8" class="text-center">
+							<span class="badge badge-default">No hay registros</span>
+						</td>
+					</tr>
+					<tr ng-if="loadDetalleOficinas">
+						<td colspan="8" class="text-center">
+							<span class="badge badge-default">Cargando...</span>
+						</td>
+					</tr> -->
+					<!-- <tr ng-if="result <= 0">
+						<td colspan="8" class="text-center">
+							<span class="badge badge-default">No se encontraron datos</span>
+						</td>
+					</tr> -->
+					<tr class="hover" *ngFor="let rows of dataEmployees">
+						<td class="table-user">
+							<img src="./assets/img/empleado.png" class="avatar rounded-circle mr-3">
+							<b>{{ rows.numDocument }}</b>
+						</td>
+						<td>{{ rows.fullName }}</td>
+						<td>{{ rows.towerName }}</td>
+						<td>{{ rows.sedeName }}</td>
+						<td>{{ rows.floor }}</td>
+						<td>{{ rows.officeName }}</td>
+						<td>{{ rows.officeName }}</td>
+						<td><button class="btn btn-sm btn-primary"><i class="fa fa-tasks"></i></button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

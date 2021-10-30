@@ -1,0 +1,39 @@
+<app-inner-header [modulo]="'labelGraphics'" [background]="'bg-default'"></app-inner-header>
+<div class="container-fluid mt--6">
+	<div class="row">
+		<div class="col-lg-12">
+			<app-graphics
+				[container]="'graphic-days'"
+				[title]="'Entrada por dias'"
+				[endpoint]="'/api/Graphics/EntryFordays'">
+			</app-graphics>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<app-graphics
+				[container]="'graphic-hour'"
+				[title]="'Entrada por hora'"
+				[endpoint]="'/api/Graphics/EntryForHours'">
+			</app-graphics>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<app-graphics
+				[container]="'graphic-exit-hour'"
+				[title]="'Salidas por hora'"
+				[endpoint]="'/api/Graphics/ExitForHours'">
+			</app-graphics>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<app-graphics
+				[container]="'graphic-in-office'"
+				[title]="'Entradas por oficina'"
+				[endpoint]="'/api/Graphics/EntryForOffices'">
+			</app-graphics>
+		</div>
+	</div>
+</div>

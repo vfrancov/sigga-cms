@@ -1,0 +1,28 @@
+<app-inner-header [modulo]="'labelComunicaciones'" [background]="'bg-default'"></app-inner-header>
+<div class="container-fluid mt--6">
+	<div class="row">
+		<div class="col-lg-8">
+			<app-card-publications-registered
+				[hidden]="!hideTablePublish"
+				[reload]="!hideTablePublish"
+				(showFormPublish)="formOpenPublish($event)">
+			</app-card-publications-registered>
+
+			<app-card-create-comunication
+				[hidden]="hideTablePublish"
+				[employee]="employeeRecord"
+				(showEmployeeList)="openEmployeeList($event)"
+				(closePublish)="formClosePublish($event)">
+			</app-card-create-comunication>
+		</div>
+		<div class="col-lg-4">
+			<app-card-publications-confirmation [hidden]="hideNotifications"></app-card-publications-confirmation>
+
+			<app-card-employee-list
+				(employeeId)="setEmployeeId($event)"
+				(closeListPersonal)="closePersonalList($event)"
+				[hidden]="hidePersonalList">
+			</app-card-employee-list>
+		</div>
+	</div>
+</div>

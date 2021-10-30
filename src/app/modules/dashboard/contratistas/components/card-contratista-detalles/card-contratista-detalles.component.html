@@ -1,0 +1,66 @@
+<div class="card">
+	<div class="card-header">
+		<div class="row align-items-center">
+			<div class="col">
+				<h5 class="h3 mb-0">Detalle Empresa</h5>
+				<small class="text-muted"><i class="fa fa-info"></i> Informacion general y detalles de la empresa
+					contratista.</small>
+			</div>
+			<div class="col text-right">
+				<div [hidden]="!hasData">
+					<button class="btn btn-info btn-sm" (click)="enableFormToEdit()">
+						<i class="fa fa-pen"></i>
+					</button>
+					<button class="btn btn-danger btn-sm" (click)="hideDetallesEmpresa()">
+						<i class="fa fa-times"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<div *ngIf="!hasData; then dontShowResult else showResult"></div>
+		<ng-template #dontShowResult>
+			<div class="text-center ng-hide" ng-hide="resultDetallEmpresa">No se muestran detalles</div>
+		</ng-template>
+		<ng-template #showResult>
+			<div class="row">
+				<div class="col text-center">
+					<img src="./assets/img/oficina_real.jpg" class="rounded img-fluid">
+				</div>
+				<div class="col">
+					<div class="my-4">
+						<span class="h6 surtitle text-muted">
+							Nit
+						</span>
+						<div class="h3">{{empresaContratista.nit}}</div>
+					</div>
+					<div class="my-4">
+						<span class="h6 surtitle text-muted">
+							Empresa
+						</span>
+						<div class="h3">{{empresaContratista.name}}</div>
+					</div>
+					<div class="my-4">
+						<span class="h6 surtitle text-muted">
+							Direccion
+						</span>
+						<div class="h3">{{empresaContratista.address}}</div>
+					</div>
+					<div class="my-4">
+						<span class="h6 surtitle text-muted">
+							Telefono
+						</span>
+						<div class="h3">{{empresaContratista.phoneNumber}}</div>
+					</div>
+					<div class="my-4">
+						<span class="h6 surtitle text-muted">
+							Correo
+						</span>
+						<div class="h3">{{empresaContratista.email}}</div>
+					</div>
+				</div>
+			</div>
+		</ng-template>
+	</div>
+</div>

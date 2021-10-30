@@ -1,0 +1,104 @@
+<div class="card">
+	<div class="card-header">
+		<div class="row align-items-center">
+			<div class="col">
+				<h5 class="h3 mb-0">{{"viewOficina" | localization : "labelMyOffices"}}</h5>
+				<small class="text-muted"><i class="fa fa-info"></i> {{ "viewOficina" | localization : "labelMyOfficesDescription" }}</small>
+			</div>
+			<div class="col d-flex justify-content-right">
+				<a href="javascript:" class="btn btn-sm btn-primary ml-4" (click)="openTorre()">Crear Torres</a>
+				<a href="javascript:" class="btn btn-sm btn-primary" ng-hide="showCreateForm"
+					(click)="addOffice()">{{ "viewOficina" | localization : "labelCreateOffice" }}</a>
+			</div>
+		</div>
+	</div>
+	<div class="card-header py-0">
+		<form [formGroup]="frmSearchOffice">
+			<div class="form-group mb-0">
+				<div class="input-group input-group-lg input-group-flush">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<span class="fas fa-search"></span>
+						</div>
+					</div>
+					<input (keyup)="makeFilterOffice($event)" type="search" formArrayName="search" class="form-control" placeholder="Buscar">
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="card-body customScroll" [class.setScroll]="officeData.length > 3">
+		<!-- <app-alert [response]="response" [error]="error"></app-alert> -->
+		<ul class="list-group list-group-flush list my--3">
+			<div *ngIf="officeData.length === 0 then showEmptyMessage else showOfficeList"></div>
+			<ng-template #showEmptyMessage>
+				<li class="list-group-item px-0">
+					<div class="row align-items-center">
+						<div class="col-auto">
+							<a href="javascript:" class="avatar avatar-load rounded-circle">
+								<img src="" />
+							</a>
+						</div>
+						<div class="col ml--2">
+							<div *ngIf="loading then showLoader else showMessage"></div>
+							<ng-template #showLoader>
+								<p>{{"viewOficina" | localization : "labelLoadingOffices"}}</p>
+							</ng-template>
+							<ng-template #showMessage>
+								<p>No hay oficinas registradas, has click en <span
+										class="badge badge-primary point">Añadir
+										Oficina</span></p>
+							</ng-template>
+						</div>
+					</div>
+				</li>
+			</ng-template>
+			<ng-template #showOfficeList>
+				<li class="list-group-item px-0 hover" *ngFor="let rows of officeData">
+					<div class="row align-items-center" (click)="showOptionsOffice(rows)"
+						[hidden]="selectedOfficeDelete === rows.id">
+						<div class="col-auto">
+							<a href="javascript:" class="avatar rounded-circle">
+								<img src="https://app.sigga.com.co/Content/assets/img/oficinas.png">
+							</a>
+						</div>
+						<div class="col ml--2">
+							<h4 class="mb-0">
+								<a href="javascript:">{{rows.name}}</a>
+							</h4>
+							<span class="text-success">●</span>
+							<small>Activo</small>
+							<br>
+							<small><a href="javascript:">Piso ({{rows.floor}}) Oficina ({{rows.numOffices}})</a></small>
+						</div>
+						<div class="col d-flex justify-content-center">
+							<a class="btn btn-sm btn-outline-default" (click)="showOptionsOffice(rows)"
+								[hidden]="selectedOfficeId === rows.id">Opciones</a>
+							<div *ngIf="selectedOfficeId === rows.id">
+								<button type="button" class="btn btn-sm btn-danger" (click)="selectItem(rows)"><i
+										class="fa fa-trash"></i></button>
+								<a href="javascript:" class="btn btn-sm btn-primary"
+									(click)="requestDetails(rows)">Ver</a>
+							</div>
+						</div>
+					</div>
+					<div class="row align-items-center" [hidden]="selectedOfficeDelete !== rows.id">
+						<div class="col">
+							<div class="row alert alert-danger">
+								<div class="col-12 text-center mb-2"><span class="text-sm">Estas seguro de eliminar esta
+										Oficina ?</span></div>
+								<div class="col text-center">
+									<button class="btn btn-sm btn-danger" (click)="deleteProcessOficina(rows)">Si,
+										Borralo</button>
+								</div>
+								<div class="col text-center">
+									<button class="btn btn-sm btn-warning" (click)="cancelDelete()">No,
+										Cancelalo</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ng-template>
+		</ul>
+	</div>
+</div>

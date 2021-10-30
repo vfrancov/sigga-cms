@@ -1,0 +1,54 @@
+<div class="card">
+	<div class="card-header">
+		<div class="row">
+			<div class="col">
+				<h5 class="h3 mb-0">Mi Movil</h5>
+				<small class="text-muted"><i class="fa fa-info"></i> Gestiona tu configuracion</small>
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="alert alert-{{(configmobile?.covid) ? 'success' : 'secondary'}} alert-dismissible fade show" role="alert">
+					<span class="alert-icon"><i class="ni {{(configmobile?.covid) ? 'ni-check-bold' : 'ni-fat-remove'}}"></i></span>
+					<span class="alert-text"><strong>COVID</strong> {{ (configmobile?.covid) ? 'Opción Habilitada' : 'Opción Inhabilitada' }}</span>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="alert alert-{{(configmobile?.visitantes) ? 'success' : 'secondary'}} alert-dismissible fade show" role="alert">
+					<span class="alert-icon"><i class="ni {{(configmobile?.visitantes) ? 'ni-check-bold' : 'ni-fat-remove'}}"></i></span>
+					<span class="alert-text"><strong>VISITANTES</strong>{{ (configmobile?.visitantes) ? 'Opción Habilitada' : 'Opción Inhabilitada' }}</span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="alert alert-{{(configmobile?.autorizados) ? 'success' : 'secondary'}} alert-dismissible fade show" role="alert">
+					<span class="alert-icon"><i class="ni {{(configmobile?.autorizados) ? 'ni-check-bold' : 'ni-fat-remove'}}"></i></span>
+					<span class="alert-text"><strong>AUTORIZADOS</strong>{{ (configmobile?.autorizados) ? 'Opción Habilitada' : 'Opción Inhabilitada' }}</span>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="alert alert-{{(configmobile?.publicaciones) ? 'success' : 'secondary'}} alert-dismissible fade show" role="alert">
+					<span class="alert-icon"><i class="ni {{(configmobile?.publicaciones) ? 'ni-check-bold' : 'ni-fat-remove'}}"></i></span>
+					<span class="alert-text"><strong>PUBLICACIONES</strong>{{ (configmobile?.publicaciones) ? 'Opción Habilitada' : 'Opción Inhabilitada' }}</span>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="alert alert-{{(configmobile?.chat) ? 'success' : 'secondary'}} alert-dismissible fade show" role="alert">
+					<span class="alert-icon"><i class="ni {{(configmobile?.chat) ? 'ni-check-bold' : 'ni-fat-remove'}}"></i></span>
+					<span class="alert-text"><strong>CHAT</strong>{{ (configmobile?.chat) ? 'Opción Habilitada' : 'Opción Inhabilitada' }}</span>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="alert alert-{{(configmobile?.contratistas) ? 'success' : 'secondary'}} alert-dismissible fade show" role="alert">
+					<span class="alert-icon"><i class="ni {{(configmobile?.contratistas) ? 'ni-check-bold' : 'ni-fat-remove'}}"></i></span>
+					<span class="alert-text"><strong>CONTRATISTAS</strong> {{ (configmobile?.contratistas) ? 'Opción Habilitada' : 'Opción Inhabilitada' }}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,55 @@
+.show-message-empty { opacity: 0.50; }
+.avatar { background-color: #fffffff5 !important;}
+.hover { cursor: pointer !important; }
+.hover:hover { background: #eee; }
+.padding-4 { padding: 4px !important; }
+.navbar-brand-img { max-width: 100% !important; max-height: 9rem !important;}
+.setScroll { overflow: auto; height: 529px; }
+.removeScroll { overflow: unset !important; height: 0% !important;}
+.customScroll::-webkit-scrollbar-track{ background-color: #fff; }
+.customScroll::-webkit-scrollbar{ width: 6px; background-color: #F5F5F5; }
+.customScroll::-webkit-scrollbar-thumb{ background-color: #00000036; height: 6px;}
+.pull-right { float: right !important; }
+.pull-left { float: left !important; }
+.no-uppercase { text-transform: none !important; }
+.avatar-load { background-color: #adb5bd !important; }
+.text-muted-load { color: #eaecfb; }
+.bg-mipersonal { background-color: #5697f1 !important; }
+.bg-misvisitantes { background-color: #9429b7 !important; }
+.bg-miscontratistas { background-color: #d1ac00 !important;}
+.bg-misterminales { background-color: darkslategrey !important; }
+.text-misvisitantes { color: #9429b7!important; }
+.text-size-13 {font-size: 13px !important;}
+.setScrollConfig {overflow: auto; height: 364px;}
+.setScrollPublications { overflow: auto; height: 500px; }
+.custom-control-label::before {border: 1px solid #ccc !important;}
+.lowercase {text-transform: lowercase !important;}
+.no-margin {margin: 0px !important;}
+.media-comment-text-success { background-color: #9429b733 !important; }
+.setScrollChat { height: 450px; overflow: auto; }
+.g-recaptcha { display: flex; justify-content: center;}
+.point { cursor: pointer; }
+.loader-sigga {position: absolute; height: 100%; width: 100%; background: #fff; opacity: 0.60; z-index: 9999; }
+.gif-sigga-loader { position: absolute; right: 44%; top: 40%; display: inline-grid; }
+.capacity {background-color: #ddddde; padding: 2rem; border-radius: 10px; font-size: 3rem; font-weight: bold;}
+.card-cerco { border: 1px solid #ccc; }
+.uppercase {text-transform: uppercase !important;}
+.navbarcollapse { margin-left: 250px;}
+.navbaruncollapse { margin-left: 62px;}
+.dropdown-btn {
+	border: none !important;
+	padding: 0px !important;
+
+}
+
+.dropdown-down {
+	border-top: 5px solid #adadad !important;
+	border-left: 5px solid transparent !important;
+	border-right: 5px solid transparent !important;
+}
+
+.dropdown-up {
+	border-bottom: 5px solid #adadad !important;
+	border-left: 5px solid transparent !important;
+	border-right: 5px solid transparent !important;
+}

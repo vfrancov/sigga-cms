@@ -1,0 +1,22 @@
+<div class="row">
+	<div class="col-lg-6 p-4">
+		<button class="btn btn-sm btn-success" (click)="downloadFile()">Exportar a Excel</button>
+	</div>
+	<div class="col-lg-6 p-4 text-right">
+		<div class="btn-group">
+			<button class="btn btn-sm btn-info" (click)="prev()"><i class="fa fa-arrow-left"></i></button>
+			<button class="btn btn-sm btn-info">{{pageNumber}}</button>
+			<button class="btn btn-sm btn-info" (click)="next()"><i class="fa fa-arrow-right"></i></button>
+		</div>
+	</div>
+</div>
+<app-data-tables [name]="'Resumen de Visitas Contratistas'" [header]="['Oficina', 'Fecha', 'Total Entradas', 'Estado']">
+	<tbody>
+		<tr *ngFor="let row of resumeEntryExits">
+			<td>{{row?.officeName}}</td>
+			<td>{{row?.entryAt}}</td>
+			<td>{{row?.totalItem}}</td>
+			<td>{{ (row?.typeUser === 'Exit') ? 'Salida Registrada' : 'No registra salida'}}</td>
+		</tr>
+	</tbody>
+</app-data-tables>

@@ -1,0 +1,82 @@
+<app-inner-header [modulo]="'labelAforoTitle'" [background]="'bg-default'"></app-inner-header>
+<div class="container-fluid mt--6">
+	<div class="row">
+		<div class="col-4">
+			<div class="card">
+				<div class="card-header">
+					<div class="row align-items-center">
+						<div class="col">
+							<h5 class="h3 mb-0">{{"viewEmpleado" | localization : "labelAforoOffices"}}</h5>
+						</div>
+					</div>
+				</div>
+				<div class="card-body customScroll" [class.setScroll]="dataAforo.length > 5">
+					<ul class="list-group list-group-flush list my--3">
+						<li class="list-group-item py-4 px-4 hover" *ngFor="let row of dataAforo">
+							<div class="row align-items-center">
+								<div class="col-auto">
+									<a href="javascript:" class="avatar">
+										<img alt="Image placeholder" src="./assets/img/aforo.png">
+									</a>
+								</div>
+								<div class="col ml--2">
+									<h4 class="mb-0">
+										<a href="javascript:">{{row?.officeName}}</a>
+									</h4>
+									<div class="full-width d-flex">
+										<span class="text-sm"> Empleados <span class="badge badge-info">{{row?.numEmployee}}</span></span>
+										<span class="text-sm"> Visitantes <span
+												class="badge badge-primary">{{row?.numVisitor}}</span></span>
+										<span class="text-sm"> Contratistas <span
+												class="badge badge-warning">{{row?.numContratista}}</span></span>
+									</div>
+								</div>
+								<div class="col-auto">
+									<div class="h1 text-center">{{row?.capacity}}</div>
+									<small>capacidad</small>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-8">
+			<div class="card">
+				<div class="card-header">
+					<div class="row align-items-center">
+						<div class="col">
+							<h5 class="h3 mb-0">Aforo General</h5>
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-6 text-center">
+							<h1>Capacidad Total</h1>
+							<div class="capacity">{{totalAforo}}</div>
+						</div>
+						<div class="col-6 text-center">
+							<h1>Aforo Total</h1>
+							<div class="capacity">{{totalCapacityPersonals}} - {{totalAforo | calculateAforo : totalCapacityPersonals}} %</div>
+						</div>
+					</div>
+					<div class="row mt-5">
+						<div class="col-4 text-center">
+							<h1>{{"viewEmpleado" | localization : "labelAforoEmployeeMain"}}</h1>
+							<div class="capacity">{{aforoEmployees}} - {{totalAforo | calculateAforo : aforoEmployees}} %</div>
+						</div>
+						<div class="col-4 text-center">
+							<h1>Aforo Visitantes</h1>
+							<div class="capacity">{{aforoVisitors}} - {{totalAforo | calculateAforo : aforoVisitors}} %</div>
+						</div>
+						<div class="col-4 text-center">
+							<h1>Aforo Contratistas</h1>
+							<div class="capacity">{{aforoContratistas}} - {{totalAforo | calculateAforo : aforoContratistas}} %</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

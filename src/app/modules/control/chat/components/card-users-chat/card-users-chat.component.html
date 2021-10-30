@@ -1,0 +1,85 @@
+<div class="card" [hidden]="showPanel">
+	<div class="card-header">
+		<h5 class="h3 mb-0">Chat Sigga</h5>
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h5 class="h1 mb-0">Chat Sigga</h5>
+				<p>Puedes iniciar una conversación al dar click a cualquiera de los usuarios disponibles</p>
+				<img src="./assets/img/chat-sigga.png" alt="Chat Sigga" width="350px">
+				<p class="text-sm">Chat Sigga es una herramienta que te permite enviar mensajes a tu personal registrado
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="card" [hidden]="!showPanel">
+	<div class="card-header">
+		<h5 class="h3 mb-0">Chat Sigga</h5>
+	</div>
+	<div class="card-header d-flex align-items-center">
+		<div class="d-flex align-items-center">
+			<a href="javascript:">
+				<img src="./assets/img/user-chat.png" class="avatar">
+			</a>
+			<div class="mx-3">
+				<a href="javascript:" class="text-dark font-weight-600 text-sm">{{chatUser?.firstName}} {{chatUser?.lastName}}</a>
+				<small class="d-block text-muted">{{ (chatUser?.numberDevice !== null) ? 'Conectado' : 'No Conectado'}}</small>
+			</div>
+		</div>
+		<div class="text-right ml-auto">
+			<button type="button" class="btn btn-sm btn-danger btn-icon" (click)="hidePanelChat()">
+				<i class="fa fa-times"></i>
+			</button>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="mb-1">
+			<div *ngIf="messagesChat?.itemCount === 0; then notMessages else showMessages"></div>
+			<ng-template #notMessages>
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<h5 class="h2 mb-1">No tienes mensajes con {{chatUser?.firstName}} {{chatUser?.lastName}}</h5>
+						<img src="./assets/img/start-chat.png" alt="Empieza un Chat" width="350px">
+						<p>Puedes iniciar una converasion con <strong></strong> al dar click en iniciar</p>
+						<button class="btn btn-success" (click)="startChat()">Iniciar Conversación!</button>
+					</div>
+				</div>
+			</ng-template>
+			<ng-template #showMessages>
+				<div>
+					<div #chatScroll class="chat-content-messages customScroll" [class.setScroll]="messagesChat?.items.length >= 5">
+						<div class="media media-comment" *ngFor="let chat of messagesChat?.items">
+							<img alt="Image placeholder" class="avatar avatar-lg media-comment-avatar rounded-circle" src="./assets/img/{{ (chat.posicion == idControlUser) ? 'control-user' : 'user-chat' }}.png">
+							<div class="media-body">
+								<div class="media-comment-text" [ngClass]="{'text-right' : chat.posicion === idControlUser, 'media-comment-text-success' : chat.posicion === idControlUser}">
+									<h6 class="h5 mt-0">{{chat.usuario}}</h6>
+									<p class="text-sm lh-160 no-margin"><strong>{{chat.message}}</strong></p>
+									<p class="text-sm text-muted">{{chat.fecha_envio | date: 'hh:mm a' | lowercase}}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="media align-items-center">
+						<img alt="Usuario de Control" class="avatar avatar-lg rounded-circle mr-4" src="./assets/img/control-user.png">
+						<div class="media-body">
+							<form [formGroup]="frmChat">
+								<div class="row">
+									<div class="col-lg-10 col-xs-10">
+										<textarea class="form-control" formControlName="message" placeholder="Escribe un mensaje" rows="1"></textarea>
+									</div>
+									<div class="col-lg-2 col-xs-2">
+										<button class="btn btn-primary btn-block pull-right" [disabled]="!frmChat.valid" (click)="sendMessageChat()"><i class="ni ni-send"></i></button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</ng-template>
+		</div>
+	</div>
+</div>

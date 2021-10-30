@@ -1,0 +1,147 @@
+<div class="card">
+	<div class="card-header">
+		<div class="row align-items-center">
+			<div class="col">
+				<h5 class="h3 mb-0">Mis Contratistas</h5>
+				<small class="text-muted"><i class="fa fa-info"></i> Relación de tus contratistas.</small>
+			</div>
+			<div class="col text-right">
+				<button class="btn btn-info btn-sm"><i class="fa fa-search"></i></button>
+			</div>
+		</div>
+	</div>
+	<div class="card-header py-0 ng-hide">
+		<form [formGroup]="frmSearchMember">
+			<div class="form-group mb-0">
+				<div class="input-group input-group-lg input-group-flush">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<span class="fas fa-search"></span>
+						</div>
+					</div>
+					<input (keyup)="makeSearch($event)" formControlName="search" type="search" class="form-control" placeholder="Buscar">
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="card-body customScroll" [class.setScroll]="dataMembers.length > 3">
+		<ul class="list-group list-group-flush list my--3">
+			<div *ngIf="dataMembers.length === 0; then showEmpty else showData"></div>
+			<ng-template #showEmpty>
+				<li class="list-group-item px-0" ng-if="contratistas.length == 0">
+					<div class="text-center">No hay registros que mostrar</div>
+				</li>
+			</ng-template>
+			<ng-template #showData>
+				<li class="list-group-item px-0 hover" *ngFor="let row of dataMembers">
+					<div class="row align-items-center" (click)="showOptionsContratista(row)" [hidden]="selectedMemberToDelete === row.id">
+						<div class="col-auto">
+							<a href="javascript:" class="avatar rounded-circle">
+								<img src="./assets/img/contratista.png">
+							</a>
+						</div>
+						<div class="col-lg-6 ml--2">
+							<h4 class="mb-0">
+								<a href="javascript:">{{row.fullName}}</a>
+							</h4>
+							<div class="mt-3">
+								<span class="badge badge-pill badge-primary text-size-13">{{row.epsName}}</span>
+								<span class="badge badge-pill badge-primary text-size-13">{{row.arlName}}</span>
+								<span class="badge badge-pill badge-primary text-size-13">{{row.numDocument}}</span>
+								<!-- <span class="badge badge-pill badge-default text-size-13"><i class="fa fa-qrcode"></i></span> -->
+							</div>
+						</div>
+						<div class="col-lg-4 text-center">
+							<div [hidden]="selectedMember !== row.id">
+								<button type="button" class="btn btn-sm btn-danger" (click)="selectItemContratista(row)">
+									<i class="fa fa-trash"></i>
+								</button>
+
+								<a href="javascript:" class="btn btn-sm btn-default" (click)="requestDetailsContratista(row)">
+									<i class="fa fa-pen"></i>
+								</a>
+
+								<!-- <button type="button" class="btn btn-sm btn-primary tooltip-message" ng-click="startRequest(rows)" data-toggle="tooltip" data-placement="top" title="Gestionar Autorización">
+									<i class="fa fa-file-invoice"></i>
+								</button> -->
+							</div>
+						</div>
+					</div>
+					<!-- <div class="row align-items-center ng-hide" ng-show="selectedIdContratistaQR == rows.id_sg_personal_proveedor">
+						<div class="col">
+							<div class="row alert alert-info ng-hide" ng-show="qrurl">
+								<div class="col-12 text-center mb-2">
+									<img src="https://chart.googleapis.com/chart?chs=160x160&amp;cht=qr&amp;chl=&amp;choe=UTF-8">
+								</div>
+								<div class="col text-center">
+									<a href="https://api.whatsapp.com/send?phone=+573003676782&amp;text=" target="blank" class="btn btn-sm btn-success">Compartir</a>
+								</div>
+								<div class="col text-center">
+									<button class="btn btn-sm btn-warning" ng-click="cancelDeleteContratista(rows.id_sg_personal_proveedor)">Cancelar</button>
+								</div>
+							</div>
+							<div class="card" ng-hide="qrurl">
+								<div class="card-header">
+									<div class="row align-items-center">
+										<div class="col">
+											<h5 class="h3 mb-0">QR para Contratista</h5>
+											<small class="text-muted"><i class="fa fa-info"></i> Por favor, diligencia el siguiente formulario para generar el QR.</small>
+										</div>
+										<div class="col text-right">
+											<button class="btn btn-danger btn-sm" ng-click="closeQR()"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+								<div class="card-body">
+
+									<form action="javascript:" method="post" class="ng-pristine ng-valid">
+										<input ng-model="contratistaData.uid" type="hidden" name="uid" value="bGVubnlzY2FycmVyb0Bob3RtYWlsLmNvbQ==" ng-init="contratistaData.uid = uid" autocomplete="off" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+										<input ng-model="contratistaData.idEmpresa" type="hidden" name="idempresa" value="91" ng-init="contratistaData.id_empresa = idEmpresa" autocomplete="off" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+										<div class="form-group">
+											<label class="form-control-label" for="actividad">Tipo de Actividad</label>
+											<select ng-model="contratistaData.id_actividad" class="form-control required ng-pristine ng-untouched ng-valid ng-empty" name="id_actividad" ng-init="contratistaData.id_actividad = ''"><option value="? string: ?" selected="selected"></option>
+												<option value="134" ng-repeat="item in resumenActividades">Visita</option><option value="135" ng-repeat="item in resumenActividades">Domicilio</option><option value="136" ng-repeat="item in resumenActividades">Mantenimiento</option><option value="137" ng-repeat="item in resumenActividades">Fumigacion</option><option value="138" ng-repeat="item in resumenActividades">Visita Autorizada</option><option value="304" ng-repeat="item in resumenActividades">Prueba</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label class="form-control-label" for="torre">Torre</label>
+											<select ng-model="contratistaData.torre" class="form-control required ng-pristine ng-untouched ng-valid ng-empty" name="torre" ng-init="contratistaData.torre = ''"><option value="? string: ?" selected="selected"></option>
+												<option value="88" ng-repeat="item in resumenTorres">Torre Norte</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label class="form-control-label" for="oficina">Oficina</label>
+											<select ng-model="contratistaData.oficina" class="form-control required ng-pristine ng-untouched ng-valid ng-empty" name="oficina" ng-init="contratistaData.oficina = ''"><option value="? string: ?" selected="selected"></option>
+												<option value="142" ng-repeat="item in resumenOficinas">Mantenimiento</option><option value="139" ng-repeat="item in resumenOficinas">Vigilancia</option><option value="135" ng-repeat="item in resumenOficinas">RRHH</option><option value="118" ng-repeat="item in resumenOficinas">Desarrollo</option><option value="117" ng-repeat="item in resumenOficinas">Comercial</option>
+											</select>
+										</div>
+										<div class="form-group row">
+											<div class="col">
+												<button class="btn btn-primary pull-right" ng-click="generateQR(rows)" ng-disabled="btnQR != 'Generar QR'">Generar QR</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div> -->
+
+					<div class="row align-items-center" [hidden]="selectedMemberToDelete !== row.id">
+						<app-alert [error]="response" [response]="response"></app-alert>
+						<div class="col">
+							<div class="row alert alert-danger">
+								<div class="col-12 text-center mb-2"><span class="text-sm">Estas seguro de eliminar este Contratista ?</span></div>
+								<div class="col text-center">
+									<button class="btn btn-sm btn-danger" (click)="deleteContratista(row)">Si, Eliminalo</button>
+								</div>
+								<div class="col text-center">
+									<button class="btn btn-sm btn-warning" (click)="cancelDeleteContratista()">No, Cancelalo</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ng-template>
+		</ul>
+	</div>
+</div>

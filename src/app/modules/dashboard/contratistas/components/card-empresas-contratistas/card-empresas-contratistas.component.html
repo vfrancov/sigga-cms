@@ -1,0 +1,94 @@
+<div class="card">
+	<div class="card-header">
+		<div class="row align-items-center">
+			<div class="col">
+				<h5 class="h3 mb-0">Empresas</h5>
+				<small class="text-muted"><i class="fa fa-info"></i> Aqui puedes ver la relacion de las empresas
+					contratistas registradas.</small>
+			</div>
+			<div class="col d-flex">
+				<a href="javascript:;" class="btn btn-sm btn-primary" (click)="showFormEmpresa()">Crear Empresa</a>
+				<a href="javascript:;" class="btn btn-sm btn-primary" (click)="showFormContratistas()">Crear
+					Contratista</a>
+			</div>
+		</div>
+	</div>
+	<div class="card-header py-0">
+		<form [formGroup]="frmSearchContratista" autocomplete="off">
+			<div class="form-group mb-0">
+				<div class="input-group input-group-lg input-group-flush">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<span class="fas fa-search"></span>
+						</div>
+					</div>
+					<input (keyup)="makeFilterContratista($event)" formArrayName="search" type="search"
+						class="form-control" placeholder="Buscar">
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="card-body customScroll" [class.setScroll]="dataContratistas.length > 5">
+		<ul class="list-group list-group-flush list my--3">
+			<div *ngIf="dataContratistas.length === 0; then showNoData else showData"></div>
+			<ng-template #showNoData>
+				<div *ngIf="loading; then showLoad else showError"></div>
+				<ng-template #showLoad>
+					<li class="list-group-item px-0">
+						<div class="text-center">Cargando Empresas ...</div>
+					</li>
+				</ng-template>
+				<ng-template #showError>
+					<li class="list-group-item px-0">
+						<div class="text-center">No se encontro la empresa</div>
+					</li>
+				</ng-template>
+			</ng-template>
+			<ng-template #showData>
+				<li class="list-group-item px-0 hover" *ngFor="let row of dataContratistas">
+					<div class="row align-items-center" (click)="showOptionsContratista(row)"
+						[hidden]="selectedContratistaDel === row.id">
+						<div class="col-auto">
+							<a href="javascript:" class="avatar rounded-circle">
+								<img src="./assets/img/oficinas.png">
+							</a>
+						</div>
+						<div class="col ml--2">
+							<h4 class="mb-0">
+								<a href="javascript:">{{row.name}}</a>
+							</h4>
+							<span class="text-success">●</span>
+							<small>Activo</small>
+							<br>
+							<small><a href="javascript:">{{row.email}}</a></small>
+						</div>
+						<div class="col d-flex justify-content-center">
+							<div *ngIf="selectedContratistaId === row.id">
+								<button type="button" class="btn btn-sm btn-danger" (click)="selectItem(row)"><i
+										class="fa fa-trash"></i></button>
+								<a href="javascript:" class="btn btn-sm btn-primary"
+									(click)="requestDetails(row)">Ver</a>
+							</div>
+						</div>
+					</div>
+					<div class="row align-items-center ng-hide" [hidden]="selectedContratistaDel !== row.id">
+						<div class="col">
+							<div class="row alert alert-danger">
+								<div class="col-12 text-center mb-2"><span class="text-sm">Estas seguro de eliminar esta
+										Empresa ?</span></div>
+								<div class="col text-center">
+									<button class="btn btn-sm btn-danger" (click)="deleteEmpresa(row)">Si,
+										Borralo</button>
+								</div>
+								<div class="col text-center">
+									<button class="btn btn-sm btn-warning" (click)="cancelDelete()">No,
+										Cancelalo</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ng-template>
+		</ul>
+	</div>
+</div>

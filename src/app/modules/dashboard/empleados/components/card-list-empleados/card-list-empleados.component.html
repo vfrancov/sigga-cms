@@ -1,0 +1,111 @@
+<div class="card">
+	<div class="card-header">
+		<div class="row align-items-center">
+			<div class="col">
+				<h5 class="h3 mb-0">{{ "viewEmpleado" | localization : "labelMyEmployees" }}</h5>
+				<span class="badge badge-info badge-md">{{employeeList.length}}</span>
+			</div>
+			<div class="col d-flex justify-content-end">
+				<!-- <a href="javascript:" class="btn btn-sm btn-info" (click)="verMisEmpleados()">Todos</a> -->
+				<a href="javascript:" class="btn btn-sm btn-primary" (click)="showFormEmpleado()">{{ "viewEmpleado" | localization : "labelCreateEmployee" }}</a>
+			</div>
+		</div>
+	</div>
+	<div class="card-header py-0">
+		<form [formGroup]="frmSearchEmploye">
+			<div class="form-group mb-0">
+				<div class="input-group input-group-lg input-group-flush">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<span class="fas fa-search"></span>
+						</div>
+					</div>
+					<input (keyup)="makeSearch($event)" type="search" name="search" class="form-control"
+						placeholder="Buscar Personal">
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="card-body customScroll" [class.setScroll]="employeeList.length > 4">
+		<ul class="list-group list-group-flush list my--3">
+			<div *ngIf="employeeList.length === 0; then showError else showRecords"></div>
+			<ng-template #showError>
+				<div *ngIf="loading then showLoading else showError"></div>
+				<ng-template #showLoading>
+					<li class="list-group-item px-0 hover">
+						<div class="text-center">{{"viewEmpleado" | localization : "labelLoadingEmployees"}}</div>
+					</li>
+				</ng-template>
+				<ng-template #showError>
+					<li class="list-group-item px-0 hover">
+						<div class="text-center">No hay registros</div>
+					</li>
+				</ng-template>
+			</ng-template>
+			<ng-template #showRecords>
+				<li class="list-group-item px-0 hover" *ngFor="let item of employeeList" (click)="seeOptions(item.id)">
+					<div class="row align-items-center" [hidden]="selectedToDelete === item.id">
+						<div class="col-auto">
+							<a href="javascript:" class="avatar rounded-circle">
+								<img src="./assets/img/empleado.png">
+							</a>
+						</div>
+						<div class="col ml--2">
+							<h4 class="mb-0 uppercase">
+								<a href="javascript:">{{item?.firstName}} {{ item?.lastName}}</a>
+							</h4>
+							<span class="text-{{(item?.statusId === 1) ? 'success' : 'danger'}}">●</span>
+							<small>{{(item?.statusId === 1) ? 'Activo' : 'Inactivo'}}</small>
+							<br>
+							<small><a href="mailto:{{item?.email}}">{{item.email}}</a></small>
+							<br>
+							<div class="d-flex role-employee">
+								<span class="badge badge-info" *ngIf="item.officeId !== 0">{{item.officeName}}</span>
+								<span class="badge badge-success" *ngIf="item.isUserControl === 4">Control</span>
+								<span class="badge badge-default" *ngIf="item.isAuthorizer">Autorizador</span>
+                <span class="badge badge-default" *ngIf="item.rolId === 2">CMS</span>
+							</div>
+						</div>
+						<div class="col d-flex justify-content-center">
+							<a class="btn btn-sm btn-outline-default" [hidden]="seeDetails == item.id">Opciones</a>
+							<div class="actions" [hidden]="seeDetails != item.id">
+								<a href="javascript:" class="btn btn-sm btn-primary" [hidden]="item.officeId != null"><i
+										class="fa fa-building"></i></a>
+								<button type="button" class="btn btn-sm btn-danger" (click)="selectItem(item.id)"><i
+										class="fa fa-trash"></i></button>
+								<a href="javascript:" class="btn btn-sm btn-primary"
+									(click)="requestDetails(item)">Ver</a>
+							</div>
+						</div>
+					</div>
+					<div class="row align-items-center">
+						<div class="col">
+							<!-- <div class="alert alert-warning text-center"><i class="fas fa-info"></i></div> -->
+							<div class="row alert alert-danger" [hidden]="selectedToDelete !== item.id">
+								<div class="col-12 text-center mb-2"><span class="text-sm">{{"viewEmpleado" | localization : "labelConfirmationEmpleado"}}</span></div>
+								<div class="col text-center">
+									<button class="btn btn-sm btn-danger" (click)="deleteProcessEmpleado(item)">Si</button>
+								</div>
+								<div class="col text-center">
+									<button class="btn btn-sm btn-warning" (click)="cancelProcess()">No</button>
+								</div>
+							</div>
+							<!-- <div class="row alert alert-danger ng-hide" ng-show="showErrorOficina">
+								<div class="col-12 text-center mb-2"><span class="text-sm">Deseas eliminarlo de todos modos
+										?</span></div>
+								<div class="col text-center">
+									<button class="btn btn-sm btn-danger"
+										ng-click="deleteConfirmation(rows.id_sg_personal)">Si, Confirmado</button>
+								</div>
+								<div class="col text-center">
+									<button class="btn btn-sm btn-warning" ng-click="cancelProcess(rows.id_sg_personal)">No,
+										Cancelalo</button>
+								</div>
+							</div> -->
+						</div>
+					</div>
+				</li>
+			</ng-template>
+		</ul>
+	</div>
+</div>

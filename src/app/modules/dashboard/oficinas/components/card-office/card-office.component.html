@@ -1,0 +1,60 @@
+<div class="card">
+	<div class="card-header">
+		<div class="row align-items-center">
+			<div class="col">
+				<h5 class="h3 mb-0">{{"viewOficina" | localization : "labelDetailOffices"}}</h5>
+				<small class="text-muted"><i class="fa fa-info"></i> {{"viewOficina" | localization : "labelDetailMainOffices"}}</small>
+			</div>
+			<div class="col text-right" *ngIf="hideDetails">
+				<button class="btn btn-sm btn-info tooltip-message" (click)="editarOficina()"><i
+						class="fa fa-pen"></i></button>
+				<button class="btn btn-sm btn-danger" (click)="cierraDetalles()"><i class="fa fa-times"></i></button>
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="row align-items-center" *ngIf="!hideDetails; then showEmpty else showDetails"></div>
+		<ng-template #showEmpty>
+			<div class="col-lg-12 text-center">No hay detalles para mostrar</div>
+		</ng-template>
+		<ng-template #showDetails>
+			<div class="row">
+				<div class="col text-center">
+					<img src="./assets/img/oficina_real.jpg" class="rounded img-fluid">
+				</div>
+				<div class="col">
+					<div class="my-4">
+						<span class="h6 surtitle text-muted">
+							Torre
+						</span>
+						<div class="h3">{{officeData?.towersName}}</div>
+					</div>
+					<div class="my-4">
+						<span class="h6 surtitle text-muted">
+							Piso
+						</span>
+						<div class="h3">{{officeData?.floor}}</div>
+					</div>
+					<div class="my-4" *ngIf="isResidential">
+						<span class="h6 surtitle text-muted">
+							Capacidad | Tiempo
+						</span>
+						<div class="h3">{{officeData?.capacity}} Personas / ({{officeData?.capacityPerHours}}) horas</div>
+					</div>
+					<div class="my-4">
+						<span class="h6 surtitle text-muted">
+							{{"viewOficina" | localization : "labelOfficeNumber"}}
+						</span>
+						<div class="h3">{{officeData?.numOffices}}</div>
+					</div>
+					<div class="my-4">
+						<span class="h6 surtitle text-muted">
+							{{"viewOficina" | localization : "labelOfficeName"}}
+						</span>
+						<div class="h3">{{officeData?.name}}</div>
+					</div>
+				</div>
+			</div>
+		</ng-template>
+	</div>
+</div>

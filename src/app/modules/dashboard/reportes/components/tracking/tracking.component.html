@@ -1,0 +1,128 @@
+<app-inner-header [modulo]="'labelTracking'" [background]="'bg-default'"></app-inner-header>
+<div class="container-fluid mt--6">
+	<div class="row">
+		<div class="col-lg-4">
+			<div class="card">
+				<!-- Card header -->
+				<div class="card-header">
+					<!-- Title -->
+					<h5 class="h3 mb-0">Oficinas Disponibles</h5>
+					<small>Resumen general de tus oficinas</small>
+				</div>
+				<div class="card-header py-0">
+					<!-- Search form -->
+					<form class="ng-pristine ng-valid">
+						<div class="form-group mb-0">
+							<div class="input-group input-group-lg input-group-flush">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<span class="fas fa-search"></span>
+									</div>
+								</div>
+								<input ng-model="searchOffice" type="search"
+									class="form-control ng-pristine ng-untouched ng-valid ng-empty"
+									placeholder="Buscar Oficina">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="card-body customScroll">
+					<div *ngIf="dataTracking.length !== 0; then showData else showMessage"></div>
+					<ng-template #showData>
+						<ul class="list-group list-group-flush list my--3">
+							<li class="list-group-item px-0 hover" *ngFor="let rows of dataTracking">
+								<div class="row align-items-center">
+									<div class="col-auto">
+										<a href="#" class="avatar">
+											<img alt="Image placeholder"
+												src="https://app.sigga.com.co/Content/assets/img/oficinas.png">
+										</a>
+									</div>
+									<div class="col ml--2">
+										<h4 class="mb-0">
+											<a href="#!">Desarrollo</a>
+										</h4>
+										<div class="text-muted text-sm font-weight-bold">Capacidad: 100</div>
+										<div class="text-muted text-sm font-weight-bold">Tiempo de Permanencia: 1 horas
+										</div>
+									</div>
+									<div class="col-auto">
+										<button type="button" class="btn btn-sm btn-primary"
+											ng-click="showTracking(rows)">Detalles</button>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</ng-template>
+					<ng-template #showMessage>
+						<ul class="list-group list-group-flush list my--3">
+							<li class="list-group-item px-0 hover">
+								<div class="text-center">
+									No hay registros de tracking
+								</div>
+							</li>
+						</ul>
+					</ng-template>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-8">
+			<div class="card">
+				<div class="card-header">
+					<h5 class="h3 mb-0">Puedes ver el tracking de personas en tus Oficinas</h5>
+					<small>Resumen general de tracking</small>
+				</div>
+				<div class="card-body">
+					<div class="image-tracker" ng-hide="showDetailsTracking">
+						<div class="row">
+							<div class="col-lg-12 text-center">
+								<h2>Tracking</h2>
+								<small>Puedes dar click en los detalles de la oficina que deseas ver el tracking</small>
+							</div>
+							<div class="col-lg-12 text-center">
+								<span class="badge badge-danger"></span>
+							</div>
+						</div>
+						<img class="img-fluid" src="https://app.sigga.com.co/Content/assets/img/tracker-banner.png">
+					</div>
+					<!-- <div class="resumen-tracking ng-hide" ng-show="showDetailsTracking">
+                        <h4 class="mb-3">Tracking en </h4>
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <div class="form-group">
+                                    <input ng-model="trackingText" type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="Ingresa nombres o cedula del empleado">
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <button class="btn btn-success mr-3" ng-click="showTable()"><i class="fas fa-th"></i></button>
+                                <button class="btn btn-primary" ng-click="showCard()"><i class="fas fa-th-large"></i></button>
+                            </div>
+                        </div>
+                        <div class="row customScroll " ng-class="{'removeScroll' : trackingText.length > 0}" ng-hide="showCardData">
+
+                        </div>
+                        <div class="row customScroll  ng-hide" ng-class="{'removeScroll' : trackingText.length > 0}" ng-show="showTableData">
+                            <div class="col">
+                                <table class="table align-items-center table-flush">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Persona</th>
+                                            <th scope="col">Sede</th>
+                                            <th scope="col">Oficina</th>
+                                            <th scope="col">Ingreso</th>
+                                            <th scope="col">Tipo</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

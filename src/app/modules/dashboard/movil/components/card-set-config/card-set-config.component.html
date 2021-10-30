@@ -1,0 +1,74 @@
+<div class="card">
+	<div class="card-header">
+		<div class="row">
+			<div class="col">
+				<h5 class="h3 mb-0">Mi Movil</h5>
+				<small class="text-muted"><i class="fa fa-info"></i> Gestiona tu configuracion</small>
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<app-alert [error]="error" [response]="response" [delay]="2500"></app-alert>
+		<form [formGroup]="frmMobileConfig">
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="form-group">
+						<div class="custom-control custom-checkbox">
+							<input class="custom-control-input" formControlName="covid" id="covid" type="checkbox">
+							<label class="custom-control-label" for="covid">Formulario COVID Inactiva</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="custom-control custom-checkbox">
+							<input class="custom-control-input" formControlName="autorizados" id="autorizados"
+								type="checkbox">
+							<label class="custom-control-label" for="autorizados">Autorizados Activo</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="form-group">
+						<div class="custom-control custom-checkbox">
+							<input ng-model="formMovil.visitantes" formControlName="visitantes"
+								class="custom-control-input" id="visitantes" type="checkbox">
+							<label class="custom-control-label" for="visitantes">Visitantes Activo</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="custom-control custom-checkbox">
+							<input ng-model="formMovil.publicaciones" formControlName="publicaciones"
+								class="custom-control-input" id="publicaciones" type="checkbox">
+							<label class="custom-control-label" for="publicaciones">Publicaciones Activo</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="form-group">
+						<div class="custom-control custom-checkbox">
+							<input ng-model="formMovil.contratistas" formControlName="contratistas"
+								class="custom-control-input" id="contratistas" type="checkbox">
+							<label class="custom-control-label" for="contratistas">Contratistas Inactiva</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="custom-control custom-checkbox">
+							<input class="custom-control-input" formControlName="chat" id="chat" type="checkbox">
+							<label class="custom-control-label" for="chat">Chat Activo</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div *ngIf="btnUpdateConfig; then showUpdateButton else showCreateButton"></div>
+					<ng-template #showUpdateButton>
+						<button class="btn btn-primary" (click)="updateMovilConfig()">Actualizar Configuración</button>
+					</ng-template>
+					<ng-template #showCreateButton>
+						<button class="btn btn-primary" (click)="saveMovilConfig()">Guardar Configuración</button>
+					</ng-template>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

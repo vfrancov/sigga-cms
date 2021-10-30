@@ -1,0 +1,13 @@
+<app-inner-header [modulo]="'labelCMSMainTitle'" [background]="'bg-default'"></app-inner-header>
+<div class="container-fluid mt--6">
+	<div class="row">
+		<div class="col-lg-4">
+			<app-card-authorizer-list (requestForm)="showFormRequest($event)" (dataEmployee)="getDataEmployee($event)"></app-card-authorizer-list>
+		</div>
+		<div class="col-lg-8">
+			<app-card-visits-list [hidden]="formRequest" [statusShowList]="formRequest"></app-card-visits-list>
+			<app-card-request-auth (closeForm)="closeFormRequest($event)" [hidden]="!formRequest" [employee]="employeeRecord">
+			</app-card-request-auth>
+		</div>
+	</div>
+</div>

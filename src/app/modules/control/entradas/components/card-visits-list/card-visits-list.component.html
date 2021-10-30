@@ -1,0 +1,90 @@
+<div class="card">
+	<div class="card-header border-0">
+		<div class="row align-items-center">
+			<div class="col">
+				<h5 class="h3 mb-0">Registro de Visitas</h5>
+			</div>
+			<div class="col text-right">
+				<button class="btn btn-sm btn-success" (click)="exportToExcel()"><i class="fa fa-file-excel"></i></button>
+				<button class="btn btn-sm btn-info" ng-show="!showSearchRecords" ng-click="showSearchRecords = true"><i
+						class="fa fa-search"></i></button>
+				<!-- <button class="btn btn-sm btn-danger ng-hide" ng-show="showSearchRecords" ng-click="showSearchRecords = false"><i class="fa fa-search-minus"></i></button> -->
+			</div>
+		</div>
+	</div>
+	<!-- <div class="card-header py-0 ng-hide" ng-show="showSearchRecords">
+		<form action="javascript:" method="post" autocomplete="off" class="ng-pristine ng-valid">
+			<div class="form-group mb-0">
+				<div class="input-group input-group-lg input-group-flush">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<span class="fas fa-search"></span>
+						</div>
+					</div>
+					<input ng-model="searchRecords" type="search" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="Buscar">
+				</div>
+			</div>
+		</form>
+	</div> -->
+	<div class="table-responsive setScroll customScroll">
+		<table id="records-visitas" class="table align-items-center table-flush">
+			<thead class="thead-light">
+				<tr>
+					<th scope="col" class="sort" data-sort="name">Empleado</th>
+					<th scope="col" class="sort" data-sort="budget">Visitante</th>
+					<th scope="col" class="sort" data-sort="status">Estado Solicitud</th>
+					<th scope="col" class="sort" data-sort="status">Estado Visita</th>
+					<th scope="col" class="sort" data-sort="status">Entrada</th>
+					<th scope="col" class="noExl">Salida</th>
+					<th scope="col" class="noExl">Duracion</th>
+					<th scope="col" class="noExl"></th>
+				</tr>
+			</thead>
+			<tbody class="list">
+				<div *ngIf="visitorsRecords.length === 0; then empty else records"></div>
+				<ng-template #empty>
+					<tr>
+						<td colspan="7" class="text-center">
+							<span>No hay registros</span>
+						</td>
+					</tr>
+				</ng-template>
+				<ng-template #records>
+					<tr *ngFor="let row of visitorsRecords">
+						<th scope="row">
+							<span class="name mb-0 text-sm">{{row.nameEmployee}}</span>
+						</th>
+						<td class="budget">
+							{{row.fullName}}
+						</td>
+						<td>
+							<span class="badge badge-dot mr-4">
+								<i class="bg-success"></i>
+								<span class="status">{{row.nameStatus}}</span>
+							</span>
+						</td>
+						<td class="text-center noExl">
+							<div class="dropdown">
+								<a class="btn btn-sm btn-icon-only text-default" href="javascript:" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="goOut(row)">
+									<i class="fas fa-flag"></i>
+								</a>
+								<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+									<a class="dropdown-item" href="javascript:">Dar Salida</a>
+								</div>
+							</div>
+						</td>
+						<td class="budget">
+							<strong>{{ row.dateEntry | setNoDate}}</strong>
+						</td>
+						<td class="budget">
+							<strong>{{ row.dateExit | setNoDate }}</strong>
+						</td>
+						<td class="budget">
+							<strong>N/A</strong>
+						</td>
+					</tr>
+				</ng-template>
+			</tbody>
+		</table>
+	</div>
+</div>

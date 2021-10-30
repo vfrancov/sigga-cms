@@ -1,0 +1,106 @@
+<div class="card">
+	<div class="card-header">
+		<div class="row align-items-center">
+			<div class="col">
+				<h5 class="h3 mb-0">{{title}}</h5>
+				<small class="text-muted"><i class="fa fa-info"></i> {{subtitle}}</small>
+			</div>
+			<div class="col text-right">
+				<!-- <button class="btn btn-sm btn-info" ng-click="showPanelBusquedaEstado()" ng-hide="showBusquedaEstado"><i class="fa fa-search"></i></button>
+                <button class="btn btn-sm btn-danger ng-hide" ng-click="hidePanelBusquedaEstado()" ng-show="showBusquedaEstado"><i class="fa fa-search-minus"></i></button>
+                <button class="btn btn-sm btn-info" ng-hide="muestraFormEstado" ng-click="showFormEstado()"><i class="fa fa-plus"></i></button>
+				<button class="btn btn-sm btn-danger ng-hide" ng-show="muestraFormEstado" ng-click="hideFormEstado()"><i class="fa fa-times"></i></button> -->
+				<button class="btn btn-sm btn-info" (click)="showCreateForm()" [hidden]="editForm"><i class="fa fa-plus"></i></button>
+				<button class="btn btn-sm btn-danger" (click)="hideCreateForm()" [hidden]="!editForm"><i class="fa fa-times"></i></button>
+			</div>
+		</div>
+	</div>
+	<div class="card-header py-0" [hidden]="true">
+		<form>
+			<div class="form-group mb-0">
+				<div class="input-group input-group-lg input-group-flush">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<span class="fas fa-search"></span>
+						</div>
+					</div>
+					<input type="search" class="form-control" placeholder="Buscar">
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="card-body customScroll" [class.setScrollConfig]="elements.length > 4">
+		<!-- <app-alert [error]="error" [response]="response" [hidden]="editForm"></app-alert> -->
+		<ul class="list-group list-group-flush list my--3" [hidden]="editForm">
+			<div *ngIf="elements.length === 0; then emptyList else showList"></div>
+			<ng-template #emptyList>
+				<li class="list-group-item px-0 hover">
+					<div class="text-center text-sm text-muted">no hay registros</div>
+				</li>
+			</ng-template>
+			<ng-template #showList>
+				<li class="list-group-item px-0 hover" *ngFor="let row of elements">
+					<div class="row align-items-center" (click)="showOptions(row)" [hidden]="selectedItemToDelete === row.id">
+						<div class="col-auto">
+							<a href="javascript:" class="avatar rounded-circle">
+								<img src="./assets/img/eps.png">
+							</a>
+						</div>
+						<div class="col ml--2">
+							<h4 class="mb-0">
+								<a href="javascript:">{{row.name}}</a>
+							</h4>
+							<span class="text-success" ng-if="true">●</span>
+							<small>Activa</small>
+							<br>
+						</div>
+						<div class="col d-flex justify-content-center">
+							<div [hidden]="selectedItem !== row.id">
+								<button class="btn btn-sm btn-danger" (click)="showDeleteAction(row)"><i class="fa fa-trash"></i></button>
+								<button class="btn btn-sm btn-default" (click)="showEditForm(row)"><i class="fa fa-pen"></i></button>
+							</div>
+						</div>
+					</div>
+					<div class="row align-items-center" [hidden]="selectedItemToDelete !== row.id">
+						<div class="col">
+							<div class="row alert alert-danger">
+								<div class="col-12 text-center mb-2">
+									<span class="text-sm">¿Estás seguro de eliminar este registro?</span>
+								</div>
+								<div class="col text-center">
+									<button class="btn btn-sm btn-danger" (click)="deleteData(service, row)">Si</button>
+								</div>
+								<div class="col text-center">
+									<button class="btn btn-sm btn-warning" (click)="cancelProcess()">No</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ng-template>
+		</ul>
+		<div [hidden]="!editForm">
+			<form [formGroup]="frmConfig">
+				<div class="form-group" *ngIf="hasHeadquarter">
+					<label class="form-control-label">Sede</label>
+					<app-combobox formControlName="sedesId" [label]="'Sede'" [name]="'sede'"
+						[endpoint]="'/api/ComboBoxGeneral/GetSedes'">
+					</app-combobox>
+				</div>
+				<div class="form-group">
+					<label class="form-control-label">{{title}}</label>
+					<input type="text" formControlName="name" class="form-control"/>
+				</div>
+				<div class="form-group">
+					<div *ngIf="!createForm; then update else create"></div>
+					<ng-template #update>
+						<button class="btn btn-primary pull-right" [disabled]="!frmConfig.valid" (click)="updateData(service)">Actualizar {{title}}</button>
+					</ng-template>
+					<ng-template #create>
+						<button class="btn btn-primary pull-right" [disabled]="!frmConfig.valid" (click)="createData(service)">Registrar {{title}}</button>
+					</ng-template>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

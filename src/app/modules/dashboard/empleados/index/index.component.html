@@ -1,0 +1,27 @@
+<app-inner-header [modulo]="'labelMyEmployees'" [background]="'bg-mipersonal'"></app-inner-header>
+<div class="container-fluid mt--6">
+	<app-card-detalle-empresa></app-card-detalle-empresa>
+	<div class="row">
+		<div class="col-lg-4">
+			<app-card-list-empleados></app-card-list-empleados>
+		</div>
+		<div class="col-lg-4" *ngIf="card !== 'formEmpleados' && card !== 'resumeEmpleados' && card !== 'formEmpresa' && card !== 'cardSedes'" [hidden]="showEditForm">
+			<app-card-employee-detail (showEditForm)="showEditFormEmployee($event)"></app-card-employee-detail>
+		</div>
+		<div class="col-lg-8" [hidden]="!showEditForm">
+			<app-card-edit-empleado (closeEditFormEmployee)="hideEditFormEmployee($event)"></app-card-edit-empleado>
+		</div>
+		<div class="col-lg-8" *ngIf="card === 'formEmpleados'">
+			<app-card-add-empleado></app-card-add-empleado>
+		</div>
+		<div class="col-lg-4" *ngIf="showSedes">
+			<app-card-sedes-add [showEditaDataSedes]="showSedes"></app-card-sedes-add>
+		</div>
+		<div class="col-lg-4" *ngIf="showCompany">
+			<app-card-company-edit></app-card-company-edit>
+		</div>
+		<div class="col-lg-8" *ngIf="showEmployeeResume">
+			<app-card-resume-empleados></app-card-resume-empleados>
+		</div>
+	</div>
+</div>

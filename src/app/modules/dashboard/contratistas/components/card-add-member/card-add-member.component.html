@@ -1,0 +1,78 @@
+<div class="card">
+	<div class="card-header">
+		<div class="row align-items-center">
+			<div class="col">
+				<h5 class="h3 mb-0">Crear Contratista</h5>
+				<small class="text-muted"><i class="fa fa-info"></i> Con este formulario puedes registrar tus contratistas.</small>
+			</div>
+			<div class="col text-right">
+				<button class="btn btn-sm btn-danger" (click)="hideFormCreateEmpresa()"><i class="fa fa-times"></i></button>
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<app-alert [error]="error" [response]="response"></app-alert>
+		<form [formGroup]="frmMember">
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="form-group">
+						<app-combobox formControlName="contratistaCompaniesId" [label]="'labelContratistaCompanie'" [name]="'contratistaCompaniesId'"
+							[endpoint]="'/api/ComboBoxGeneral/GetContratistaCompanies'">
+						</app-combobox>
+					</div>
+					<div class="form-group">
+						<app-combobox formControlName="epsId" [label]="'labelEps'" [name]="'eps'"
+							[endpoint]="'/api/ComboBoxGeneral/GetEps'">
+						</app-combobox>
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-6">
+								<app-combobox formControlName="arlId" [label]="'labelArl'" [name]="'arl'"
+									[endpoint]="'/api/ComboBoxGeneral/GetArl'">
+								</app-combobox>
+							</div>
+							<div class="col-6">
+								<app-combobox formControlName="officesId" [label]="'labelOffice'" [name]="'office'"
+									[endpoint]="'/api/ComboBoxGeneral/GetOffices'">
+								</app-combobox>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="form-control-label">Celular</label>
+						<input type="number" formControlName="phoneNumber" class="form-control">
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="form-group">
+						<label class="form-control-label">Cedula</label>
+						<input type="number" formControlName="numDocument" class="form-control">
+					</div>
+					<div class="form-group">
+						<label class="form-control-label">Nombres y Apellidos</label>
+						<input type="text" formControlName="fullName" class="form-control">
+					</div>
+					<div class="form-group">
+						<label class="form-control-label">Correo</label>
+						<input type="email" formControlName="emailAddress" class="form-control"/>
+					</div>
+					<div class="form-group">
+						<label class="form-control-label">Fecha Expedición Cedula</label>
+						<input type="date" formControlName="expeditionDocument" class="form-control"/>
+					</div>
+				</div>
+			</div>
+			<div class="box-footer">
+				<div *ngIf="isUpdate; then showUpdate else showCreate"></div>
+				<ng-template #showUpdate>
+					<button type="submit" class="btn btn-primary pull-right" (click)="updateContratista()" [disabled]="!frmMember.valid">Actualizar Contratista</button>
+				</ng-template>
+				<ng-template #showCreate>
+					<button type="submit" class="btn btn-primary pull-right" (click)="createContratista()" [disabled]="!frmMember.valid">Registrar Contratista</button>
+				</ng-template>
+				<button type="reset" class="btn btn-default pull-left">Cancelar</button>
+			</div>
+		</form>
+	</div>
+</div>

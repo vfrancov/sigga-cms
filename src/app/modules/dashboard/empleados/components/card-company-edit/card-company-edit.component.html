@@ -1,0 +1,45 @@
+<div class="card">
+	<div class="card-header">
+		<div class="row align-items-center">
+			<div class="col">
+				<h5 class="h3 mb-0">{{ "viewEmpleado" | localization : "labelMyCompanie" }}
+        <br>
+        <span class="text-sm text-muted">Actualiza los datos</span></h5>
+			</div>
+			<div class="col text-right">
+				<button class="btn btn-sm btn-danger" (click)="closeEditEmpresa()"><i class="fa fa-times"></i></button>
+			</div>
+		</div>
+	</div>
+	<div class="card-header py-0">
+
+	</div>
+	<div class="card-body">
+		<div *ngIf="response?.status === 204">
+			<div class="alert alert-success text-center">Se ha procesado con exito el registro</div>
+		</div>
+		<form [formGroup]="frmEditCompany" autocomplete="off">
+			<div class="box-body">
+				<div class="form-group">
+					<label class="form-control-label">{{ "viewEmpleado" | localization : "labelFormEditCompany" }}</label>
+					<input type="text" formControlName="name" class="form-control" value="AREATIC">
+				</div>
+				<div class="form-group">
+					<label class="form-control-label">NIT</label>
+					<input type="number" formControlName="nit" class="form-control" value="890425747">
+				</div>
+				<div class="form-group">
+					<label class="form-control-label">Correo</label>
+					<input type="text" formControlName="email" class="form-control"
+						value="lennyscarrero@hotmail.com">
+				</div>
+				<div class="form-group">
+					<label class="form-control-label">{{"viewEmpleado" | localization : "labelFormEditAddress"}}</label>
+					<input type="text" formControlName="address" class="form-control" value="Calle 80">
+				</div>
+			</div>
+			<div class="box-footer">
+				<button type="submit" class="btn btn-primary pull-right"(click)="editaempresa()" [disabled]="!frmEditCompany.valid || saving">{{"viewEmpleado" | localization : btnUpdateCompany}}</button> </div>
+		</form>
+	</div>
+</div>

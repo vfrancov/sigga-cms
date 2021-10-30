@@ -1,0 +1,68 @@
+<div class="card">
+	<div class="card-header">
+		<div class="row align-items-center">
+			<div class="col">
+				<h5 class="h3 mb-0">{{"viewEmpleado" | localization : "labelCMSTitle"}}</h5>
+			</div>
+			<div class="col text-right">
+				<button class="btn btn-sm btn-info"><i class="fa fa-search"></i></button>
+				<!-- <button class="btn btn-sm btn-danger"><i class="fa fa-search-minus"></i></button> -->
+			</div>
+		</div>
+	</div>
+	<!-- <div class="card-header py-0" ng-show="showBusquedaPersonal">
+		<form action="javascript:" method="post" autocomplete="off" class="ng-pristine ng-valid">
+			<div class="form-group mb-0">
+				<div class="input-group input-group-lg input-group-flush">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<span class="fas fa-search"></span>
+						</div>
+					</div>
+					<input ng-model="searchPersonal" type="search" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="Buscar">
+				</div>
+			</div>
+		</form>
+	</div> -->
+	<div class="card-body customScroll" [class.setScroll]="authorizerList.length > 5">
+		<ul class="list-group list-group-flush list my--3">
+			<li class="list-group-item px-0 hover" *ngFor="let row of authorizerList" (click)="showOption(row)">
+				<div class="row align-items-center">
+					<div class="col-auto">
+						<a href="javascript:" class="avatar rounded-circle">
+							<img alt="Image placeholder" src="./assets/img/empleado.png">
+						</a>
+					</div>
+					<div class="col ml--2">
+						<h4 class="mb-0">
+							<a href="javascript:">{{row.firstName}} {{row.lastName}}</a>
+						</h4>
+						<span class="text-{{(row.numberDevice === null) ? 'danger' : 'success'}}">●</span>
+						<small>{{row.officeName}}</small>
+						<span class="badge badge-pill badge-primary">{{row.email}}</span>
+					</div>
+					<div class="col-auto">
+						<button type="button" class="btn btn-sm btn-primary" *ngIf="selectedOption === row.id" (click)="showRequestForm(row)" [disabled]="row.numberDevice === null">Sigga</button>
+					</div>
+				</div>
+				<!-- <div class="row">
+					<div class="col ng-hide" ng-show="rows.id_sg_personal == userRequestPermision">
+						<div class="row alert alert-default">
+							<div class="col-12 text-center mb-2"><span class="text-sm">Esperando Autorizacion ...</span></div>
+							<div class="col-12 text-center" ng-if="btnSigga == 'Espera ...'">
+								<img src="https://app.sigga.com.co/Content/assets/img/block.png" style="width: 35%; margin: 5px 0px 17px;">
+							</div>
+
+							<div class="col text-center">
+								<button class="btn btn-sm btn-danger" ng-click="cancelRequest()">Cancelar</button>
+							</div>
+							<div class="col text-center">
+								<button class="btn btn-sm btn-primary" ng-disabled="btnSigga != 'Sigga'" ng-click="reportSigga()" disabled="disabled">Espera ...</button>
+							</div>
+						</div>
+					</div>
+				</div> -->
+			</li>
+		</ul>
+	</div>
+</div>

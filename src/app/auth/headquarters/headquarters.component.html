@@ -1,0 +1,80 @@
+<app-navbar></app-navbar>
+<div class="header bg-primary pb-5">
+	<div class="container-fluid">
+		<div class="header-body">
+			<div class="row align-items-center py-4">
+				<div class="col-lg-6 col-7">
+					<h6 class="h2 text-white d-inline-block mb-0">Bienvenido a Sigga!</h6>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid mt--6">
+	<div class="col-lg-6 offset-md-3">
+		<div class="card">
+			<div class="card-header">
+				<div class="row align-items-center">
+					<div class="col-8">
+						<h5 class="h3 mb-0">Te damos la bienvenida a Sigga</h5>
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="row" *ngIf="!showSuccess">
+					<div class="col-12 mb-3 text-center" ng-if="!createdSede">
+						<h5 class="h3 mb-3">Tus Sedes</h5>
+						<img class="img-fluid" src="./assets/img/sedes.png">
+						<p class="card-text">Crea las sedes de tu empresa, si solo tienes una sede crea está como principal.
+						</p>
+						<div class="alert alert-danger" *ngIf="showErrorCreate">Ha ocurrido un error al registrar la sede</div>
+					</div>
+					<div class="col-12">
+						<div ng-if="!createdSede">
+							<form [formGroup]="frmCreateHeadQuarter" (ngSubmit)="createHeadQuarter()">
+								<div class="form-group">
+									<label class="form-control-label">Nombre Sede</label>
+									<input type="text" formControlName="name" class="form-control required">
+								</div>
+								<div class="form-group">
+									<label class="form-control-label">Direccion</label>
+									<input type="text" formControlName="address" class="form-control required">
+								</div>
+								<div class="form-group">
+									<label class="form-control-label">Telefono</label>
+									<input type="number" formControlName="phoneNumber" class="form-control required">
+								</div>
+								<button type="submit" class="btn btn-primary pull-right" [disabled]="!frmCreateHeadQuarter.valid || btnCreateHeadQuarter != 'Crear sede'">{{btnCreateHeadQuarter}}</button>
+								<button class="btn btn-default" (click)="cancelProcess()">Cancelar</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="row" *ngIf="showSuccess">
+					<div class="col-lg-6 offset-md-3 mt-6">
+						<div class="card card-pricing bg-gradient-success border-0 text-center mb-4">
+							<div class="card-header bg-transparent">
+								<h4 class="text-uppercase ls-1 text-white py-3 mb-0">Bien! hemos registrado tu Sede
+								</h4>
+							</div>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-12">
+										<span class=" text-white">Para empezar, solo da click en Entrar a
+											Sigga!</span>
+									</div>
+									<div class="col-12">
+										<button type="button" class="btn btn-primary mb-3 mt-5" (click)="goToSigga()">Entrar a Sigga!</button>
+									</div>
+								</div>
+							</div>
+							<div class="card-footer bg-transparent">
+								<a href="#!" class=" text-white">Sigga</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

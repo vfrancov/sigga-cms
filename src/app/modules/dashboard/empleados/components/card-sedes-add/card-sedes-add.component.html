@@ -1,0 +1,228 @@
+<div id="showSedes" [hidden]="!showEditaDataSedes">
+	<div class="card">
+		<div class="card-header">
+			<div class="row align-items-center">
+				<div class="col">
+					<h5 class="h3 mb-0">Mis Sedes <span class="text-sm text-muted">Gestiona tus sedes</span></h5>
+				</div>
+				<div class="col text-right">
+					<button class="btn btn-sm btn-primary" (click)="addSede()">Crear Sede</button>
+					<button class="btn btn-sm btn-danger" (click)="closeSede()" [hidden]="!showCreateSede"><i
+							class="fa fa-times"></i></button>
+					<button class="btn btn-sm btn-danger" (click)="closeSedeCard()" [hidden]="showCreateSede"><i
+							class="fa fa-times"></i></button>
+				</div>
+			</div>
+			<!-- <div class="alert alert-{{typeMessage}} mt-2 text-center" ng-if="deleteSuccessSede">{{ reloadingSede }}</div> -->
+		</div>
+		<!-- <div class="card-header py-0">
+			<form action="javascript:">
+				<div class="form-group mb-0">
+					<div class="input-group input-group-lg input-group-flush">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<span class="fas fa-search"></span>
+							</div>
+						</div>
+						<input type="search" class="form-control" placeholder="Buscar Sede">
+					</div>
+				</div>
+			</form>
+		</div> -->
+		<div class="card-body customScroll" [ngClass]="{'setScroll' : resumeHeadQuerter.length > 3}">
+			<!-- List group -->
+			<ul class="list-group list-group-flush list my--3">
+				<div *ngIf="resumeHeadQuerter.length === 0; then noRecords else showRecords"></div>
+				<ng-template #noRecords>
+					<li class="list-group-item px-0">
+						<div class="row align-items-center">
+							<div class="col-auto">
+								<a href="javascript:" class="avatar avatar-load rounded-circle">
+									<img src="" />
+								</a>
+							</div>
+							<div class="col ml--2">
+								<p>No hay sedes registradas, has click en <span class="badge badge-primary point"
+										(click)="addSede()">Añadir Sede</span></p>
+							</div>
+						</div>
+					</li>
+				</ng-template>
+				<ng-template #showRecords>
+					<li class="list-group-item px-0 hover" *ngFor="let rows of resumeHeadQuerter"
+						(click)="seeOptions(rows.id)">
+						<div class="row align-items-center" [hidden]="selectedToDelete === rows.id">
+							<div class="col-auto">
+								<a href="javascript:" class="avatar rounded-circle">
+									<img src="./assets/img/sedes.png" />
+								</a>
+							</div>
+							<div class="col ml--2">
+								<h4 class="mb-0">
+									<a href="javascript:">{{ rows.name }}</a>
+								</h4>
+								<span class="text-success" *ngIf="rows.statusName == 'Active'">●</span>
+								{{rows.statusName}}
+								<br>
+								<small><a href="http://maps.google.com/?q={{rows.address}}"
+										target="_blank">{{ rows.address }}</a></small>
+								<br>
+								<small>{{rows.phoneNumber}}</small>
+							</div>
+							<div class="col-auto">
+								<div class="actions" [hidden]="selectedItem != rows.id">
+									<button type="button" class="btn btn-sm btn-neutral" (click)="editSede(rows)">
+										<i class="fa fa-pen"></i>
+									</button>
+									<a href="http://maps.google.com/?q={{rows.address}}" class="btn btn-sm btn-primary" target="_blank"><i class="ni ni-pin-3"></i></a>
+									<!-- <button type="button" class="btn btn-sm btn-danger" (click)="selectItem(rows.id)">
+										<i class="fa fa-trash"></i>
+									</button> -->
+								</div>
+							</div>
+						</div>
+						<div class="row align-items-center">
+							<div class="col" [hidden]="selectedToDelete != rows.id">
+								<div class="row alert alert-danger">
+									<div class="col-12 text-center mb-2"><span class="text-sm">Estas seguro de eliminar
+											esta Sede ?</span></div>
+									<div class="col text-center">
+										<button class="btn btn-sm btn-danger" (click)="deleteProcessSede(rows)">Si,
+											Borralo</button>
+									</div>
+									<div class="col text-center">
+										<button class="btn btn-sm btn-warning" (click)="cancelProcess()">No,
+											Cancelalo</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ng-template>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div [hidden]="!showCreateSede">
+	<div class="card">
+		<div class="card-header">
+			<div class="row align-items-center">
+				<div class="col">
+					<h5 class="h3 mb-0">Mis Sedes <span class="text-sm text-muted">Crea una nueva Sede</span></h5>
+				</div>
+				<div class="col text-right">
+					<button class="btn btn-sm btn-danger" (click)="closeSede()"><i class="fa fa-times"></i></button>
+				</div>
+			</div>
+		</div>
+		<div class="card-header py-0">
+
+		</div>
+		<div class="card-body">
+			<div>
+				<app-alert [error]="error" [response]="response"></app-alert>
+				<form [formGroup]="frmCreateSede" class="none ng-pristine ng-valid" autocomplete="off">
+					<div class="box-body">
+						<div class="form-group">
+							<label class="form-control-label">Nombre Sede</label>
+							<input sede="" type="text" formControlName="name" class="form-control required">
+						</div>
+						<div class="form-group">
+							<label class="form-control-label">Direccion</label>
+							<input type="text" formControlName="address" class="form-control required">
+						</div>
+						<div class="form-group">
+							<label class="form-control-label">Telefono</label>
+							<input type="number" formControlName="phoneNumber" class="form-control required">
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary pull-right" [disabled]="!frmCreateSede.valid || saving"
+						(click)="createSede()">{{btnCreateSede}}</button>
+					<button type="reset" class="btn btn-default" (click)="closeSede()">Cancelar</button>
+				</form>
+			</div>
+			<!---->
+			<!-- <div class="alert alert-secondary alert-dismissible fade show ng-hide" role="alert" ng-show="createdSede">
+				<span class="alert-icon"><i class="fa fa-info"></i></span>
+				<span class="alert-text"><strong>Recuerda!</strong> Con tus sedes creadas puedes registrar los empleados
+					de tu empresa!</span>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div> -->
+			<!-- <div class="row alert alert-info ng-hide" ng-show="createdSede">
+				<div class="col-12 text-center">
+					<div class="col text-center mb-2"><span class="text-sm">Deseas registrar otra sede ?</span></div>
+				</div>
+				<div class="col">
+					<button class="btn btn-sm btn-neutral" ng-click="doneSede()">No</button>
+				</div>
+				<div class="col text-center">
+					<button class="btn btn-sm btn-primary ml-5" ng-click="anotherSede()">Si</button>
+				</div>
+			</div> -->
+		</div>
+	</div>
+</div>
+
+<div [hidden]="!showEditaSede">
+	<div class="card">
+		<div class="card-header">
+			<div class="row align-items-center">
+				<div class="col">
+					<h5 class="h3 mb-0">Mis Sedes <span class="text-sm text-muted">Actualiza tu Sede</span></h5>
+				</div>
+				<div class="col text-right">
+					<button class="btn btn-sm btn-danger" (click)="closeSede()"><i class="fa fa-times"></i></button>
+				</div>
+			</div>
+		</div>
+		<div class="card-header py-0">
+			<app-alert [error]="error" [response]="response" [hidden]="showEditaSede"></app-alert>
+		</div>
+		<div class="card-body">
+			<div>
+				<form [formGroup]="frmCreateSede" class="none ng-pristine ng-valid" autocomplete="off">
+					<div class="box-body">
+						<div class="form-group">
+							<label class="form-control-label">Nombre Sede</label>
+							<input sede="" type="text" formControlName="name" class="form-control required">
+						</div>
+						<div class="form-group">
+							<label class="form-control-label">Direccion</label>
+							<input type="text" formControlName="address" class="form-control required">
+						</div>
+						<div class="form-group">
+							<label class="form-control-label">Telefono</label>
+							<input type="number" formControlName="phoneNumber" class="form-control required">
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary pull-right" [disabled]="!frmCreateSede.valid || saving"
+						(click)="updateSede()">{{btnUpdateSede}}</button>
+					<button type="reset" class="btn btn-default" (click)="closeSede()">Cancelar</button>
+				</form>
+			</div>
+			<!---->
+			<!-- <div class="alert alert-secondary alert-dismissible fade show ng-hide" role="alert" ng-show="createdSede">
+				<span class="alert-icon"><i class="fa fa-info"></i></span>
+				<span class="alert-text"><strong>Recuerda!</strong> Con tus sedes creadas puedes registrar los empleados
+					de tu empresa!</span>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div> -->
+			<!-- <div class="row alert alert-info ng-hide" ng-show="createdSede">
+				<div class="col-12 text-center">
+					<div class="col text-center mb-2"><span class="text-sm">Deseas registrar otra sede ?</span></div>
+				</div>
+				<div class="col">
+					<button class="btn btn-sm btn-neutral" ng-click="doneSede()">No</button>
+				</div>
+				<div class="col text-center">
+					<button class="btn btn-sm btn-primary ml-5" ng-click="anotherSede()">Si</button>
+				</div>
+			</div> -->
+		</div>
+	</div>
+</div>

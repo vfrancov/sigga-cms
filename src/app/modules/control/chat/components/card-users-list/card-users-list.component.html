@@ -1,0 +1,45 @@
+<div class="card">
+	<div class="card-header">
+		<h5 class="h3 mb-0 pull-left">{{"viewEmpleado" | localization : "labelCMSTitle"}}</h5>
+		<button class="btn btn-sm btn-info pull-right">Chat Control</button>
+		<!-- <button class="btn btn-sm btn-danger pull-right ng-hide" ng-hide="chatPersonalControl"
+			ng-click="closePersonalControl()"><i class="fa fa-times"></i></button> -->
+	</div>
+	<div class="card-body customScroll" [class.setScroll]="listEmployees.length > 5">
+		<!-- <div ng-hide="chatPersonalControl" class="ng-hide">
+			<ul class="list-group list-group-flush list my--3">
+				<li class="list-group-item px-0 text-center" ng-if="connectedControl.length == 0">No hay usuarios</li>
+			</ul>
+		</div> -->
+		<div>
+			<ul class="list-group list-group-flush list my--3">
+				<li class="list-group-item px-0 hover" *ngFor="let row of listEmployees; let i = index" (click)="selectedUser(row)">
+					<div class="row align-items-center">
+						<div class="col-auto">
+							<a href="#" class="avatar rounded-circle">
+								<img alt="Image placeholder"
+									src="https://app.sigga.com.co//Content/assets/img/user-chat.png">
+							</a>
+						</div>
+						<div class="col ml--2">
+							<h4 class="mb-0">
+								<a href="javascript:">{{row.firstName}} {{row.lastName}}</a>
+							</h4>
+							<span class="text-{{(row.numberDevice !== null) ? 'success' : 'danger'}}">● </span>
+							<small>{{(row.numberDevice !== null) ? 'Conectado' : 'No Conectado'}}</small>
+							<!-- <small class="badge badge-success">1</small> -->
+						</div>
+						<div class="col-auto">
+							<!-- <span class="badge badge-success">1</span> -->
+							<button type="button" class="btn btn-sm btn-success" *ngIf="row.id === idEmployee">{{countMessage}}</button>
+							<button type="button" class="btn btn-sm btn-primary" [hidden]="row.id !== userSelected"
+								(click)="enableChat(row)">
+								<i class="ni ni-send"></i>
+							</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

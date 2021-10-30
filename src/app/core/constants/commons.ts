@@ -1,0 +1,10 @@
+export const commons = {
+	EMPTY_DATE: '0000-00-00 00:00:00',
+	NO_DATE: '01/01/1999 00:00:00',
+	SELECT_FILE: 'Seleccione un archivo',
+	IS_NUMBER: 'number',
+	TEMPLATE_ID: '636c093b-5b29-423c-9231-578444c1b213',
+	TEMPLATE_CHAT: '636c093b-5b29-423c-9231-578444c1b213',
+	SOCKET_CONNECTED: 'Connected',
+	SOCKET_DISCONNECTED: 'Disconnected'
+}

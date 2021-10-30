@@ -1,0 +1,38 @@
+<div class="card">
+	<div class="card-header">
+		<div class="row align-items-center">
+			<div class="col">
+				<h5 class="h3 mb-0">Mis Torres</h5>
+				<small class="text-muted"><i class="fa fa-info"></i> Relación de las torres de tu Empresa ó
+					Unidad</small>
+			</div>
+			<div class="col text-right">
+				<button class="btn btn-sm btn-warning" (click)="cancelAddTorre()">Cancelar</button>
+				<button class="btn btn-sm btn-danger" (click)="closeTorre()"><i class="fa fa-times"></i></button>
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<div>
+			<app-alert [response]="response" [error]="error"></app-alert>
+			<form [formGroup]="frmCrateTower" autocomplete="off">
+				<div class="box-body">
+					<div class="form-group">
+						<label class="form-control-label">Selecciona la Sede</label>
+						<select formControlName="sedesId" class="form-control">
+							<option value="">Seleccione una opcion ...</option>
+							<option [value]="item.id" *ngFor="let item of comboBoxSedes">{{item.name}}</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label class="form-control-label">Nombre de la Torre</label>
+						<input type="text" formControlName="name" class="form-control">
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary pull-right" (click)="createTorre()"
+					[disabled]="!frmCrateTower.valid">{{btnCreateTower}}</button>
+				<button type="reset" class="btn btn-default" (click)="cancelAddTorre()">Cancelar</button>
+			</form>
+		</div>
+	</div>
+</div>

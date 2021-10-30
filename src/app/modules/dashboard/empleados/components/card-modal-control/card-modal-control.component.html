@@ -1,0 +1,74 @@
+<div class="modal fade" [class.show]="showModal" id="add-user-control" tabindex="-1" role="dialog"
+	aria-labelledby="add-user-control" aria-hidden="true" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
+	<div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<div class="d-flex flex-column">
+					<h6 class="modal-title" id="modal-title-default">{{"viewEmpleado" | localization : "labelTypeUser"}}</h6>
+					<small>{{"viewEmpleado" | localization : "labelTypeUserDescription"}}</small>
+				</div>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+					(click)="closingModalControl()">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<app-alert [error]="error" [response]="response"></app-alert>
+						<form [formGroup]="frmAddControlUser">
+							<div class="form-group">
+								<label class="form-control-label">Usuario</label>
+								<input type="email" formControlName="email" class="form-control" placeholder="user@control.com">
+							</div>
+							<div class="form-group">
+								<label class="form-control-label">Contraseña (minimo 8 caracteres)</label>
+								<input type="password" formControlName="passone" class="form-control" maxlength="8">
+							</div>
+							<div class="form-group">
+								<label class="form-control-label">Confirmar contraseña</label>
+								<input type="password" formControlName="passtwo" class="form-control" maxlength="8">
+							</div>
+							<div class="form-group">
+								<div class="custom-control custom-checkbox mb-3">
+									<input class="custom-control-input" id="isuseradmin" type="checkbox" formControlName="isUserAdmin">
+									<label class="custom-control-label" for="isuseradmin">Administrador CMS</label>
+								  </div>
+							</div>
+              <div class="form-group">
+								<div class="custom-control custom-checkbox mb-3">
+									<input class="custom-control-input" id="isResidential" type="checkbox" formControlName="isResidential">
+									<label class="custom-control-label" for="isResidential">Residencial</label>
+								  </div>
+							</div>
+							<div class="form-group">
+								<label class="form-control-label">Sedes</label>
+								<ng-multiselect-dropdown
+									class="form-control"
+									[placeholder]="'Escoje la sede'"
+									[data]="dropdownList"
+									[settings]="dropdownSettings"
+									(onSelect)="onItemSelect($event)"
+									(onDeSelect)="onItemDeselect($event)"
+									(onDeSelectAll)="onDeselectAll($event)"
+									(onSelectAll)="onSelectAll($event)">
+								</ng-multiselect-dropdown>
+							</div>
+							<div class="row">
+								<div class="col-lg-6"></div>
+								<div class="col-lg-6 text-right">
+									<button class="btn btn-primary" [disabled]="!frmAddControlUser.valid || creating" (click)="createUserControl()">{{btnCreateControlUser}}</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button #closeModal type="button" class="btn btn-link  ml-auto" (click)="closingModalControl()"
+					data-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-backdrop fade show" [hidden]="!showModal"></div>

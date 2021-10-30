@@ -1,0 +1,39 @@
+<app-inner-header [modulo]="'labelMyCompanie'" [background]="'bg-misvisitantes'"></app-inner-header>
+<div class="container-fluid mt--6">
+	<app-card-detalle-oficinas [offices]="amountOffices" (modalVisits)="showModalVisits($event)" (modalIo)="showModalInOut($event)">
+	</app-card-detalle-oficinas>
+	<div class="row">
+		<div class="col-lg-4"
+			*ngIf="stateData.name === 'details' || stateData.name === 'create' || stateData.name === 'towers'">
+			<app-card-list-oficinas (officesAmount)="setAmountOffices($event)"></app-card-list-oficinas>
+		</div>
+		<div class="col-lg-4" *ngIf="stateData.name === 'details'">
+			<app-card-office></app-card-office>
+		</div>
+		<div class="col-lg-4" *ngIf="stateData.name === 'create'">
+			<app-card-create-office></app-card-create-office>
+		</div>
+		<div class="col-lg-4" *ngIf="stateData.show && stateData.name === 'towers'">
+			<app-card-towers></app-card-towers>
+		</div>
+		<div class="col-lg-4" *ngIf="stateData.show && stateData.name === 'office'">
+			<app-card-office></app-card-office>
+		</div>
+		<div class="col-lg-8" *ngIf="stateData.show && stateData.name === 'listEmployeesAndOffices'">
+			<app-card-list-employees></app-card-list-employees>
+		</div>
+		<div class="col-lg-4">
+			<app-card-members></app-card-members>
+		</div>
+	</div>
+</div>
+
+<app-modal-container [modalId]="'modal-resume-visits'" [modalTitle]="'Resumen de Visitas'"
+	[modalShow]="showModalVisitis" (modalHide)="showModalVisits($event)">
+	<app-card-visits-offices></app-card-visits-offices>
+</app-modal-container>
+
+<app-modal-container [modalId]="'modal-resume-io'" [modalTitle]="'Resumen de Entradas/Salidas'"
+	[modalShow]="showModalIO" (modalHide)="showModalInOut($event)">
+	<app-card-io></app-card-io>
+</app-modal-container>

@@ -1,0 +1,24 @@
+<div class="card">
+	<div class="card-header">
+		<h5 class="h3 mb-0">Confirmaciones <span class="badge badge-info">{{confirmations.length}}</span></h5>
+	</div>
+	<div class="card-body p-0 customScroll" [class.setScroll]="confirmations.length > 5">
+		<div class="list-group list-group-flush" *ngFor="let rows of confirmations">
+			<a href="javascript:" class="list-group-item list-group-item-action flex-column align-items-start py-4 px-4"
+				ng-repeat="confirm in confirmations">
+				<div class="d-flex w-100 justify-content-between">
+					<div>
+						<div class="d-flex w-100 align-items-center">
+							<img src="./assets/img/empleado.png" class="avatar avatar-xs mr-2">
+							<h5 class="mb-1">{{rows.fullName}}</h5>
+						</div>
+					</div>
+					<small>{{rows.dateRead}}</small>
+				</div>
+				<h4 class="mt-3 mb-1"><span class="text-success">●</span> {{rows.name}}</h4>
+				<p class="text-sm mb-0">Ha leido la notificación <span class="badge badge-success">{{rows.numberRead}}</span> vez.</p>
+				<p class="text-sm mt-2">{{rows.dateRead}}</p>
+			</a>
+		</div>
+	</div>
+</div>

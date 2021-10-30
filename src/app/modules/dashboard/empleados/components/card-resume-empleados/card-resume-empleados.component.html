@@ -1,0 +1,67 @@
+<div class="card">
+	<!-- Card header -->
+	<div class="card-header border-0">
+		<div class="row">
+			<div class="col">
+				<h3 class="mb-0">{{ "viewEmpleado" | localization : "reportResumeEmpleados" }}</h3>
+			</div>
+			<div class="col text-right">
+				<button id="export-to-excel" class="btn btn-sm btn-success" [hidden]="dataResumeEmployee.length === 0" (click)="exportExcel()"><i class="fa fa-file-excel"></i></button>
+				<!-- <button class="btn btn-sm btn-success">Importar</button> -->
+				<a href="javascript:" class="btn btn-sm btn-danger btn-round btn-icon" (click)="closeDetailsInOut()">
+					<span class="btn-inner--text"><i class="fa fa-times"></i></span>
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="table-responsive customScroll" [ngClass]="{ 'setScroll' : dataResumeEmployee.length > 10}">
+		<table id="todos-mis-empleados" class="table align-items-center table-flush">
+			<thead class="thead-light">
+				<tr>
+					<th>Cédula</th>
+          <th>Tipo de Documento</th>
+					<th>Nombres</th>
+					<th>Apellidos</th>
+          <th>Dirección</th>
+          <th>Sede</th>
+          <th>Arl</th>
+          <th>Eps</th>
+					<th>{{ "viewEmpleado" | localization : "oficina" }}</th>
+					<th>Correo</th>
+					<th>Telefono</th>
+					<th>Estado</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngIf="dataResumeEmployee.length == 0 && loadDetalleEmpleados == false">
+					<td colspan="7" class="text-center">
+						<span class="badge badge-default">No se registran Empleados</span>
+					</td>
+				</tr>
+				<tr *ngIf="loadDetalleEmpleados">
+					<td colspan="7" class="text-center">
+						<span class="badge badge-default">Cargando...</span>
+					</td>
+				</tr>
+				<tr class="hover" *ngFor="let rows of dataResumeEmployee">
+					<td class="table-user">
+						{{ rows.numDocument }}
+					</td>
+          <td>{{rows.typeDocumentsName}}</td>
+					<td>{{ rows.firstName }}</td>
+					<td>{{ rows.lastName }}</td>
+          <td>{{ rows.address }}</td>
+          <td>{{ rows.sedeName }}</td>
+          <td>{{ rows.arlName }}</td>
+          <td>{{ rows.epsName }}</td>
+					<td>{{ rows.officeName }}</td>
+					<td>{{ rows.email }}</td>
+					<td>{{ rows.phoneNumber }}</td>
+					<td>
+						<span class="badge badge-pill badge-{{(rows.statusName == 'Active') ? 'success' : 'danger'}}">{{(rows.statusName == 'Active') ? 'Activo' : 'Inactivo'}}</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

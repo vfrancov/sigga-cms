@@ -1,0 +1,42 @@
+<div [ngSwitch]="response?.status">
+	<div *ngSwitchCase="status.CREATE"
+		[ngClass]="{'alert alert-success text-center' : response?.status === status.CREATE}">
+		Se ha procesado con exito el registro
+	</div>
+	<div *ngSwitchCase="status.SUCCESS"
+		[ngClass]="{'alert alert-success text-center' : response?.status === status.SUCCESS}">
+		Se ha procesado con exito el registro
+	</div>
+	<div *ngSwitchCase="status.NO_CONTENT"
+		[ngClass]="{'alert alert-success text-center' : response?.status === status.NO_CONTENT}">
+		Se ha procesado con exito el registro
+	</div>
+</div>
+<div [ngSwitch]="error?.status">
+	<div *ngSwitchCase="status.BAD_REQUEST"
+		[ngClass]="{'alert alert-danger text-center' : error?.status === status.BAD_REQUEST}">
+		<div *ngIf="error?.error?.message != undefined; then showErrorServer else showErrorMessage"></div>
+		<ng-template #showErrorServer>
+			{{error?.error?.message}}
+		</ng-template>
+		<ng-template #showErrorMessage>
+			Ha ocurrido un error al procesar esta solicitud 400
+		</ng-template>
+	</div>
+	<div *ngSwitchCase="status.NOT_FOUND"
+		[ngClass]="{'alert alert-danger text-center' : error?.status === status.NOT_FOUND}">
+		No se ha encotrado el recurso
+	</div>
+	<div *ngSwitchCase="status.METHOD_NOT_ALLOWED"
+		[ngClass]="{'alert alert-danger text-center' : error?.status === status.METHOD_NOT_ALLOWED}">
+		Acción no permitida
+	</div>
+	<div *ngSwitchCase="status.INTERNAL_SERVER_ERROR"
+		[ngClass]="{'alert alert-danger text-center' : error?.status === status.INTERNAL_SERVER_ERROR}">
+		Error interno en el Servidor
+	</div>
+	<div *ngSwitchCase="status.TIMEOUT"
+		[ngClass]="{'alert alert-danger text-center' : error?.status === status.INTERNAL_SERVER_ERROR}">
+		Timeout de conexion
+	</div>
+</div>

@@ -1,0 +1,85 @@
+<div class="card" *ngIf="!showFormConfig">
+  <div class="card-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h5 class="h3 mb-0">Gestiona tus Modulos <span class="badge badge-info"></span></h5>
+        <small class="text-muted"><i class="fa fa-info"></i> Modulos en tu tablet para la recepción o
+          porteria.</small>
+      </div>
+      <div class="col text-right">
+        <button class="btn btn-sm btn-info" *ngIf="modulesTerminal.length < 3" (click)="showFormAsignModule()">Asignar
+          Modulos</button>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table align-items-center table-flush">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Modulo</th>
+          <th scope="col">Oficina</th>
+          <th scope="col">Estado Modulo</th>
+          <th scope="col">Tipo Terminal</th>
+          <th scope="col">Configuración</th>
+        </tr>
+      </thead>
+      <tbody class="list">
+        <tr *ngIf="modulesTerminal.length === 0">
+          <th scope="row" class="text-center" colspan="7">
+            No hay modulos que mostrar, selecciona un usuario para asignarle modulos
+            <button class="btn btn-sm btn-info" (click)="showFormAsignModule()" *ngIf="showButton">Asignar
+              Modulos</button>
+          </th>
+        </tr>
+        <tr *ngFor="let item of modulesTerminal; let position = index">
+          <td>
+            <strong class="badge" [class.badge-info]="item.module === 'Mis Empleados'"
+              [class.badge-primary]="item.module === 'Mis Visitantes'"
+              [class.badge-warning]="item.module === 'Mis Contratistas'">{{item.module}}</strong>
+          </td>
+          <th scope="row">
+            <div class="media align-items-center">
+              <a href="javascript:" class="avatar mr-3">
+                <img alt="Image placeholder" src="./assets/img/online-banking.png">
+              </a>
+              <div class="media-body">
+                <span class="name mb-0 text-sm">{{item.record.officeName}}</span>
+              </div>
+            </div>
+          </th>
+          <td>
+            <span class="badge badge-{{(item.record | terminalStatus : position) ? 'success' : 'danger'}}">
+              {{ (item.record | terminalStatus : position) ? 'Activa' : 'Inactiva' }}
+            </span>
+          </td>
+          <td>
+            <span class="badge badge-primary">{{item.record.typeControlName}}</span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-default" (click)="editModuleTerminal(item, item.module)">
+              <i class="fa fa-cog"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="card" *ngIf="showFormConfig">
+  <div class="card-header">
+    <div class="row">
+      <div class="col">
+        <h5 class="h3 mb-0">Gestiona tus Modulos <span class="badge badge-info"></span></h5>
+        <small class="text-muted"><i class="fa fa-info"></i> Modulos en tu tablet para la recepción o porteria.</small>
+      </div>
+      <div class="col">
+        <button class="btn btn-sm btn-danger pull-right" (click)="hideFormCreateTerminal()"><i
+            class="fa fa-times"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <app-card-add-moduleconfig [terminalData]="modules" (updateGridTerminal)="updateTerminals($event)">
+    </app-card-add-moduleconfig>
+  </div>
+</div>

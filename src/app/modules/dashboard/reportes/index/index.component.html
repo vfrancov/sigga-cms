@@ -1,0 +1,154 @@
+<app-inner-header [modulo]="'labelReports'" [background]="'bg-default'"></app-inner-header>
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="mb-0">Reporte General de Visitas</h3>
+          <p class="text-sm mb-0">
+            Este reporte comprende el detalle general de visitas de tu empresa
+          </p>
+        </div>
+        <div class="card-body p-0">
+          <p-table class="table align-items-center table-flush" styleClass="p-datatable-customers p-datatable-gridlines"
+            [columns]="cols" [value]="rowData" responsiveLayout="scroll" [paginator]="true" [rows]="10"
+            [showCurrentPageReport]="true" [loading]="loading" [totalRecords]="records" [lazy]="true"
+            (onLazyLoad)="loadRecords($event)"
+            [globalFilterFields]="['numDocument','fullName','sedeName','officeName', 'terminalName', 'symptoms', 'typeUser']"
+            currentPageReportTemplate="Mostrando {first} a {last} de {{records}} registros">
+            <ng-template pTemplate="caption">
+              <div class="p-d-flex">
+                <button type="button" (click)="exportExcel()" class="btn btn-success btn-sm p-mr-2"><i
+                    class="fa fa-file-excel"></i> {{buttonDownload}}</button>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th>
+                  <div class="p-d-flex p-jc-between p-ai-center">
+                    Cédula
+                    <p-columnFilter type="text" field="numDocument" display="menu"></p-columnFilter>
+                  </div>
+                </th>
+                <th>
+                  <div class="p-d-flex p-jc-between p-ai-center">
+                    Nombres Completos
+                    <p-columnFilter type="text" field="fullName" display="menu"></p-columnFilter>
+                  </div>
+                </th>
+                <th>
+                  <!-- <div class="p-d-flex p-jc-between p-ai-center">
+                    Sede
+                    <p-columnFilter type="text" field="sedeName" display="menu"></p-columnFilter>
+                  </div> -->
+                  <div class="p-d-flex p-jc-between p-ai-center">
+                    Sedes
+                    <p-columnFilter field="sedeName" matchMode="in" display="menu" [showMatchModes]="false"
+                      [showOperator]="false" [showAddButton]="false">
+                      <ng-template pTemplate="header">
+                        <div class="p-3 text-center">
+                          <span class="p-text-bold">Selecciona Sede</span>
+                        </div>
+                      </ng-template>
+                      <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-multiSelect [options]="comboSedes" [(ngModel)]="selectedSede" placeholder="Seleccionar..."
+                          (onChange)="filter($event.value)" optionLabel="prop">
+                          <ng-template let-option pTemplate="item" let-value="item">
+                            <div class="p-multiselect-representative-option">
+                              <span class="p-ml-1">{{option.prop}}</span>
+                            </div>
+                          </ng-template>
+                        </p-multiSelect>
+                      </ng-template>
+                    </p-columnFilter>
+                  </div>
+                </th>
+                <th>
+                  <!-- <div class="p-d-flex p-jc-between p-ai-center">
+                    Oficina
+                    <p-columnFilter type="text" field="officeName" display="menu"></p-columnFilter>
+                  </div> -->
+                  <div class="p-d-flex p-jc-between p-ai-center">
+                    Oficina
+                    <p-columnFilter field="officeName" matchMode="in" display="menu" [showMatchModes]="false"
+                      [showOperator]="false" [showAddButton]="false">
+                      <ng-template pTemplate="header">
+                        <div class="p-3 text-center">
+                          <span class="p-text-bold">Selecciona Oficina</span>
+                        </div>
+                      </ng-template>
+                      <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                        <p-multiSelect [options]="comboOficinas" [(ngModel)]="selectedOffice"
+                          placeholder="Seleccionar..." (onChange)="filter($event.value)" optionLabel="prop">
+                          <ng-template let-option pTemplate="item" let-value="item">
+                            <div class="p-multiselect-representative-option">
+                              <span class="p-ml-1">{{option.prop}}</span>
+                            </div>
+                          </ng-template>
+                        </p-multiSelect>
+                      </ng-template>
+                    </p-columnFilter>
+                  </div>
+                </th>
+                <th>
+                  <div class="p-d-flex p-jc-between p-ai-center">
+                    Terminal
+                    <p-columnFilter type="text" field="terminalName" display="menu"></p-columnFilter>
+                  </div>
+                </th>
+                <th>
+                  <div class="p-d-flex p-jc-between p-ai-center">
+                    Entrada
+                    <p-columnFilter type="text" field="entryAt" display="menu">
+                      <ng-template pTemplate="filter" let-filter="filterCallback">
+                        <p-calendar (onSelect)="filter($event)" dateFormat="yy-mm-dd" selectionMode="range"></p-calendar>
+                      </ng-template>
+                    </p-columnFilter>
+                  </div>
+                </th>
+                <th>
+                  <div class="p-d-flex p-jc-between p-ai-center">
+                    Salida
+                    <p-columnFilter type="text" field="exitAt" display="menu">
+                      <ng-template pTemplate="filter" let-filter="filterCallback">
+                        <p-calendar (onSelect)="filter($event)" dateFormat="yy-mm-dd" selectionMode="range"></p-calendar>
+                      </ng-template>
+                    </p-columnFilter>
+                  </div>
+                </th>
+                <th>
+                  <div class="p-d-flex p-jc-between p-ai-center">
+                    Sintomas
+                    <p-columnFilter type="text" field="symptoms" display="menu"></p-columnFilter>
+                  </div>
+                </th>
+                <th>
+                  <div class="p-d-flex p-jc-between p-ai-center">
+                    Tipo de Usuario
+                    <p-columnFilter type="text" field="typeUser" display="menu"></p-columnFilter>
+                  </div>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData>
+              <tr>
+                <td>{{rowData.numDocument}}</td>
+                <td>{{rowData.fullName}}</td>
+                <td>{{rowData.sedeName}}</td>
+                <td>{{rowData.officeName}}</td>
+                <td>{{rowData.terminalName}}</td>
+                <td>{{rowData.entryAt | date: 'y-MM-dd h:m:s a'}}</td>
+                <td>{{ (rowData.dateExitAt === "1999-01-01") ? 'NO REGISTRA SALIDA' : rowData.exitAt | date: 'y-MM-dd h:m:s a'}}</td>
+                <td class="text-center"><span
+                    class="badge badge-{{(rowData.symptoms) ? 'danger' : 'info'}}">{{(rowData.symptoms) ? 'SI' :
+                    'NO'}}</span></td>
+                <td class="text-center">{{rowData.typeUser}}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+        <div class="card-footer">&nbsp;</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+<div class="card" [hidden]="ocultaFormCreacionOficina">
+  <div class="card-header">
+    <div class="row align-items-center">
+      <div class="col-10">
+        <h5 class="h3 mb-0">{{"viewOficina" | localization : "labelRegisterOffice"}}</h5>
+        <small class="text-muted"><i class="fa fa-info"></i> {{ "viewOficina" | localization : "labelOfficeDetail" }}</small>
+      </div>
+      <div class="col-2 text-right">
+        <button class="btn btn-sm btn-warning ng-hide" [hidden]="enableFormTorre"
+          (click)="cancelAddTorre()">Cancelar</button>
+        <button class="btn btn-sm btn-danger" (click)="closeAddOffice()">
+          <i class="fa fa-times"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <app-alert [response]="response" [error]="error"></app-alert>
+    <div [hidden]="recordCreated">
+      <form [formGroup]="frmCreateOffice" autocomplete="off">
+        <div class="box-body">
+          <div class="form-group">
+            <label class="form-control-label">Torre</label>
+            <select id="idTorre" formControlName="towersId" class="form-control">
+              <option value="" selected="selected">Selecciona tu Torre</option>
+              <option [value]="item.id" *ngFor="let item of comboBoxTorres">{{item.name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-control-label">{{"viewOficina" | localization : "labelNameOffice"}}</label>
+            <input type="text" formControlName="name" class="form-control" value="">
+          </div>
+          <div class="form-group mb-0">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="form-control-label">{{"viewOficina" | localization : "labelFloor"}}</label>
+                <input type="text" formControlName="floor" class="form-control">
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label">{{"viewOficina" | localization : "labelNumberOffice"}}</label>
+                  <input type="text" formControlName="numOffices" class="form-control">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mb-0">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="form-control-label">{{"viewOficina" | localization : "labelCapacity"}}</label>
+                <input type="number" formControlName="capacity" class="form-control" min="0">
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label">{{"viewOficina" | localization : "labelMaxPerm"}}</label>
+                  <input type="number" formControlName="capacityPerHours" class="form-control" min="0">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box-footer">
+          <div *ngIf="isUpdate; then showUpdate else showCreate"></div>
+          <ng-template #showUpdate>
+            <button type="submit" class="btn btn-primary pull-right" (click)="updateOficina()"
+              [disabled]="!frmCreateOffice.valid || saving">{{"viewOficina" | localization : btnUpdateOffice}}</button>
+          </ng-template>
+          <ng-template #showCreate>
+            <button type="submit" class="btn btn-primary pull-right" (click)="createOficina()"
+              [disabled]="!frmCreateOffice.valid || saving">{{"viewOficina" | localization : btnCreateOffice}}</button>
+          </ng-template>
+          <button type="reset" class="btn btn-default" (click)="cancelAddTorre()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+    <!-- <div class="alert alert-success ng-hide" ng-show="recordCreated">
+			<span class="alert-inner--icon"><i class="ni ni-check-bold"></i></span>
+			<span class="alert-inner--text"><strong>Bien!</strong> </span>
+			<button type="button" class="close" ng-click="borraMensajeSuccess()">
+				<span aria-hidden="true">×</span>
+			</button>
+		</div>
+		<div class="alert alert-default alert-dismissible fade show ng-hide" role="alert" ng-show="recordCreated">
+			<span class="alert-icon"><i class="fa fa-info"></i></span>
+			<span class="alert-text"><strong>Bien!</strong> Has creado tu oficina, recuerda que debes asignar a tus
+				empleados dando click en el boton <strong>opciones</strong> de la oficina!</span>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">×</span>
+			</button>
+		</div>
+		<div class="row alert alert-info ng-hide" ng-show="recordCreated">
+			<div class="col-12 text-center mb-2"><span class="text-sm">Deseas registrar una oficina más ?</span></div>
+
+			<div class="col text-center">
+				<button class="btn btn-sm btn-neutral" ng-click="borraMensajeSuccess()">No</button>
+			</div>
+			<div class="col text-center">
+				<button class="btn btn-sm btn-primary ml-5" ng-click="another()">Si</button>
+			</div>
+		</div> -->
+  </div>
+</div>

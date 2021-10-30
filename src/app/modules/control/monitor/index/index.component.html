@@ -1,0 +1,31 @@
+<div class="header pb-6 {{bgModule}}">
+	<div class="container-fluid">
+		<div class="header-body">
+			<div class="row align-items-center py-4">
+				<div class="col-lg-12">
+					<h6 class="h2 text-white d-inline-block mb-0">Monitor</h6>
+					<a href="javascript:" class="btn btn-sm btn-info" (click)="showMiPersonal()">Mi Personal</a>
+					<a href="javascript:" class="btn btn-sm btn-primary" (click)="showMisVisitantes()">Mis Visitantes</a>
+					<a href="javascript:" class="btn btn-sm btn-warning" (click)="showMisContratistas()">Mis Contratistas</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid mt--6">
+	<div class="row">
+		<div class="col-xl-12">
+			<!-- mi personal -->
+			<app-employees [hidden]="personal" [titleCard]="'Resumen de Registros Mis Empleados'"></app-employees>
+			<!-- mi personal -->
+
+			<!-- mis visitantes -->
+			<app-visitors [hidden]="visitors" [titleCard]="'Resumen de Registros Mis Visitantes'"></app-visitors>
+			<!-- mis visitantes -->
+
+			<!-- mis contratistas -->
+			<app-contratistas [hidden]="contratistas" [titleCard]="'Resumen de Registros Mis Contratistas'"></app-contratistas>
+			<!-- mis contratistas -->
+		</div>
+	</div>
+</div>

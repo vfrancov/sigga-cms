@@ -1,0 +1,200 @@
+<div class="card-header py-0">
+  <form [formGroup]="formSearch">
+    <div class="form-group mb-0">
+      <div class="input-group input-group-lg input-group-flush">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <span class="fas fa-search"></span>
+          </div>
+        </div>
+        <input type="search" formControlName="search" class="form-control" placeholder="Busqueda por nombre">
+      </div>
+    </div>
+  </form>
+</div>
+<table class="table align-items-center table-flush">
+	<thead class="thead-light" *ngIf="typeControl === 'employee'">
+		<th *ngFor="let field of fields">{{field}}</th>
+	</thead>
+	<thead class="thead-light" *ngIf="typeControl === 'visitors'">
+		<th *ngFor="let field of fields">{{field}}</th>
+	</thead>
+	<thead class="thead-light" *ngIf="typeControl === 'contratistas'">
+		<th *ngFor="let field of fields">{{field}}</th>
+	</thead>
+	<tbody class="list">
+		<div
+			*ngIf="logsEntryExitEmployees.length === 0 && logsEntryExitVisitors.length === 0 && logsEntryExitContratistas.length === 0; then noLogs else showLogs">
+		</div>
+		<ng-template #noLogs>
+			<tr>
+				<th colspan="11" class="text-center">
+					<span>No hay actividad de monitoreo</span>
+				</th>
+			</tr>
+		</ng-template>
+		<ng-template #showLogs>
+			<ng-container *ngIf="typeControl === 'employee'">
+				<tr *ngFor="let row of logsEntryExitEmployees">
+					<th>
+						<div class="media align-items-center">
+							<a href="javascript:" class="avatar rounded-circle mr-3">
+								<div>
+									<img alt="{{row.nameEmployee}}" src="./assets/img/empleado.png">
+								</div>
+							</a>
+							<div class="media-body">
+								<span class="name mb-0 text-sm uppercase">{{row.nameEmployee}}</span>
+							</div>
+						</div>
+					</th>
+					<td class="budget">
+						{{row.numDocument}}
+					</td>
+					<td class="budget">
+						<strong>{{row.entryFormatAt}}</strong>
+					</td>
+					<td class="budget">
+						<div *ngIf="row.exitFormatAt === '01/01/1999 00:00:00'; then showDate else dontShowDate"></div>
+						<ng-template #showDate><strong>NO REGISTRA SALIDA</strong></ng-template>
+						<ng-template #dontShowDate><strong>{{row.exitFormatAt}}</strong></ng-template>
+					</td>
+					<td class="status">
+						<div *ngIf="row.exitFormatAt !== '01/01/1999 00:00:00'; then noOut else Out"></div>
+						<ng-template #noOut>
+							<span class="text-danger mr-2"><i class="fa fa-arrow-down"></i> Salida</span>
+						</ng-template>
+						<ng-template #Out>
+							<span class="text-success mr-2"><i class="fa fa-arrow-up"></i> Ingreso</span>
+						</ng-template>
+					</td>
+					<td class="budget">
+						<strong>{{row.temperature}}</strong>
+					</td>
+					<td class="budget">
+						<span class="badge badge-success">{{ (row.symptoms === 'False') ? 'No' : 'Si'}}</span>
+					</td>
+					<td class="budget">
+						{{row.nameSedes}}
+					</td>
+					<td class="budget">
+						{{row.nameArl}}
+					</td>
+					<td class="budget">
+						{{row.nameEps}}
+					</td>
+				</tr>
+			</ng-container>
+			<ng-container *ngIf="typeControl === 'visitors'">
+				<tr *ngFor="let row of logsEntryExitVisitors">
+					<th>
+						<div class="media align-items-center">
+							<a href="javascript:" class="avatar rounded-circle mr-3">
+								<div>
+									<img alt="{{row.fullName}}" src="./assets/img/empleado.png">
+								</div>
+							</a>
+							<div class="media-body">
+								<span class="name mb-0 text-sm uppercase">{{row.fullName}}</span>
+							</div>
+						</div>
+					</th>
+					<td class="budget">
+						{{row.numDocument}}
+					</td>
+					<td class="budget entrada">
+						<div *ngIf="row.entryAtFormat === '01/01/1999 00:00:00'; then showEntryDate else dontShowEntryDate"></div>
+						<ng-template #showEntryDate><strong>REQUIERE AUTORIZACIÓN</strong></ng-template>
+						<ng-template #dontShowEntryDate><strong>{{row.entryAtFormat}}</strong></ng-template>
+					</td>
+					<td class="budget salida">
+						<div *ngIf="row.exitAtFormat === '01/01/1999 00:00:00'; then showDate else dontShowDate"></div>
+						<ng-template #showDate><strong>NO REGISTRA SALIDA</strong></ng-template>
+						<ng-template #dontShowDate><strong>{{row.exitAtFormat}}</strong></ng-template>
+					</td>
+					<td class="status">
+						<div *ngIf="row.entryAtFormat === '01/01/1999 00:00:00'; then noOut else Out"></div>
+						<ng-template #noOut>
+							<span class="text-danger mr-2"><i class="fas fa-exclamation-triangle"></i> No ha sido autorizado</span>
+						</ng-template>
+						<ng-template #Out>
+              <div *ngIf="row.entryAtFormat !== '01/01/1999 00:00:00' && row.exitAtFormat !== '01/01/1999 00:00:00'; then isIn else isOut"></div>
+							<ng-template #isIn>
+                <span class="text-danger mr-2"><i class="fa fa-arrow-down"></i> Salida</span>
+              </ng-template>
+              <ng-template #isOut>
+                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> Ingreso</span>
+              </ng-template>
+						</ng-template>
+					</td>
+					<td class="budget">
+						<strong>{{row.temperature}}</strong>
+					</td>
+					<td class="budget">
+						<span class="badge badge-success">{{ (row.symptoms === 'False') ? 'No' : 'Si'}}</span>
+					</td>
+					<td class="budget">
+						{{row.nameTowers}}
+					</td>
+					<td class="budget">
+						{{row.nameOffices}}
+					</td>
+					<td class="budget">
+						{{row.nameSedes}}
+					</td>
+				</tr>
+			</ng-container>
+			<ng-container *ngIf="typeControl === 'contratistas'">
+				<tr *ngFor="let row of logsEntryExitContratistas">
+					<th>
+						<div class="media align-items-center">
+							<a href="javascript:" class="avatar rounded-circle mr-3">
+								<div>
+									<img alt="{{row.fullName}}" src="./assets/img/empleado.png">
+								</div>
+							</a>
+							<div class="media-body">
+								<span class="name mb-0 text-sm uppercase">{{row.fullName}}</span>
+							</div>
+						</div>
+					</th>
+					<td class="budget">
+						{{row.numDocument}}
+					</td>
+					<td class="budget">
+						<strong>{{row.dateEntryFormat}}</strong>
+					</td>
+					<td class="budget">
+						<div *ngIf="row.dateExitFormat === '01/01/1999 00:00:00'; then showDate else dontShowDate"></div>
+						<ng-template #showDate><strong>NO REGISTRA SALIDA</strong></ng-template>
+						<ng-template #dontShowDate><strong>{{row.dateExitFormat}}</strong></ng-template>
+					</td>
+					<td class="status">
+						<div *ngIf="row.dateExitFormat !== '01/01/1999 00:00:00'; then noOut else Out"></div>
+						<ng-template #noOut>
+							<span class="text-danger mr-2"><i class="fa fa-arrow-down"></i> Salida</span>
+						</ng-template>
+						<ng-template #Out>
+							<span class="text-success mr-2"><i class="fa fa-arrow-up"></i> Ingreso</span>
+						</ng-template>
+					</td>
+					<td class="budget">
+						{{row.temperature}}
+					</td>
+					<td class="budget">
+						<span class="badge badge-success">{{ (row.symptoms === 'False') ? 'No' : 'Si'}}</span>
+					</td>
+					<td class="budget">
+						{{row.nameArl}}
+					</td>
+					<td class="budget">
+						{{row.nameEps}}
+					</td>
+          <td class="budget">
+						<span class="text-success mr-2"><i class="fa fa-check"></i> Activa</span>
+					</td>
+				</tr>
+			</ng-container>
+		</ng-template>
+	</tbody>
+</table>

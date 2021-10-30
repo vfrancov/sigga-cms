@@ -1,0 +1,91 @@
+<div class="card">
+	<div class="card-header">
+		<div class="row align-items-center">
+			<div class="col">
+				<h5 class="h3 mb-0">Formulario de Solicitud - <span class="badge badge-default">{{employee?.firstName}} {{employee?.lastName}}</span></h5>
+			</div>
+			<div class="col text-right">
+				<button class="btn btn-sm btn-danger" (click)="closeRequestForm()"><i class="fa fa-times"></i></button>
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<app-alert [error]="error" [response]="response"></app-alert>
+		<form [formGroup]="frmRequestAuth" class="row">
+			<div class="col-lg-6">
+				<div class="form-group">
+					<label class="form-control-label" for="cedula">Cedula</label>
+					<input tabindex="1" type="number" formControlName="numDocument" class="form-control" id="cedula"
+						placeholder="Ingresa Cedula de Visitante">
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col">
+							<label class="form-control-label" for="cedula">Temperatura</label>
+							<select id="temp" formControlName="temperature" class="form-control" tabindex="4">
+								<option value="" selected="selected">Seleccione temperatura</option>
+								<option value="36.0">36.0</option>
+								<option value="37.0">37.0</option>
+								<option value="38.0">38.0</option>
+								<option value="39.0">39.0</option>
+							</select>
+						</div>
+						<div class="col">
+							<label class="form-control-label" for="cedula">Presenta Sintomas</label>
+							<select id="sint" formControlName="symptoms" class="form-control" tabindex="5">
+								<option value="" selected="selected">Presenta Sintomas ?</option>
+								<option [value]="true">Si</option>
+								<option [value]="false">No</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="form-group row">
+					<div class="col-lg-6">
+						<label class="form-control-label" for="nombres">Nombres</label>
+						<input tabindex="2" type="text" formControlName="fullName" class="form-control" id="nombres"
+							placeholder="Nombres Visita">
+					</div>
+					<div class="col-lg-6">
+						<label class="form-control-label" for="direccion">Dirección</label>
+						<input tabindex="3" type="text" class="form-control" id="direccion" formControlName="address"
+							placeholder="Clle ó Cra # XX - XX">
+					</div>
+				</div>
+				<div class="form-group">
+					<app-combobox tabindex="6" formControlName="typesActivitiesId" [label]="'Tipo de Actividad'" [name]="'typesActivitiesId'"
+						[endpoint]="'/api/ComboBoxGeneral/GetTypesActivities'">
+					</app-combobox>
+				</div>
+				<!-- <button type="button" class="btn btn-success pull-left" ng-click="showFormPin()">Dame tu PIN</button> -->
+				<button type="submit" class="btn btn-primary pull-right" tabindex="7"
+					[disabled]="!frmRequestAuth.valid || saving" (click)="createRequestAuth()">{{btnCreateAuth}}</button>
+			</div>
+		</form>
+
+		<!-- <form name="formpin" action="javascript:" method="post" ng-show="showPin" ng-submit="validatePin()" class="ng-pristine ng-valid ng-hide">
+			<div class="row">
+				<div class="col-4">&nbsp;</div>
+				<div class="col-4">
+					<div class="form-group text-center">
+						<label class="form-control-label" for="nombres">Tu PIN</label>
+						<input ng-model="pin" type="text" class="form-control full-width" name="pin" placeholder="Ingresa tu PIN">
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col">
+								<button type="reset" class="btn btn-danger btn-block mb-3" ng-click="cancelPin()">Cancelar</button>
+							</div>
+							<div class="col">
+								<button class="btn btn-primary btn-block mb-3" ng-disabled="pin.length > 6 || pin == '' || btnPIN != 'Validar PIN' || pin.length < 6" disabled="disabled">Validar PIN</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-4">&nbsp;</div>
+			</div>
+		</form> -->
+	</div>
+</div>

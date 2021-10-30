@@ -1,0 +1,5 @@
+<label class="form-control-label" *ngIf="!combosm">{{"viewEmpleado" | localization : label}}</label>
+<select [(ngModel)]="value" class="form-control" [class.form-control-sm]="combosm" (input)="onChange($event.target.value)" (blur)="onTouched()" [disabled]="disabled">
+	<option value="" selected>Selecciona {{"viewEmpleado" | localization : label}}</option>
+	<option [value]="option.id" *ngFor="let option of comboData">{{option.prop}}</option>
+</select>

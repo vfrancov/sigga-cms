@@ -1,0 +1,128 @@
+<div class="card">
+	<div class="card-header">
+		<div class="row align-items-center">
+			<div class="col">
+				<h5 class="h3 mb-0">
+					{{"viewEmpleado" | localization : "labelEditEmpleado"}}
+				</h5>
+				<small class="text-muted"><i class="fa fa-info"></i> Detalles generales</small>
+			</div>
+			<div class="col text-right">
+				<button class="btn btn-sm btn-danger" (click)="closeFormEdit()">
+					<i class="fa fa-times"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<form [formGroup]="frmEditEmployee">
+			<div class="row">
+				<div class="col-lg-12">
+					<app-alert [response]="response" [error]="error" [hidden]="hideMessage"></app-alert>
+					<h3 class="mb-1">Datos Generales</h3>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<app-combobox formControlName="typeDocumentsId" [label]="'labelTypeDocument'"
+									[name]="'tipo_documento'" [endpoint]="'/api/ComboBoxGeneral/TypeDocuments'">
+								</app-combobox>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="form-control-label" for="tipo">Documento</label>
+								<input type="text" formControlName="numDocument" class="form-control"
+									placeholder="Cedula">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="form-control-label" for="nombres">Nombres</label>
+								<input type="text" formControlName="fname" class="form-control" placeholder="Nombres">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="form-control-label" for="apellidos">Apellidos</label>
+								<input type="text" formControlName="lname" class="form-control" placeholder="Apellidos">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="form-control-label" for="direccion">Dirección</label>
+								<input type="text" formControlName="address" class="form-control"
+									placeholder="Direccion">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="form-control-label" for="telefono">Telefono</label>
+								<input type="number" formControlName="phoneNumber" class="form-control"
+									placeholder="Telefono">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="form-control-label" for="sede">Oficina</label>
+								<app-combobox formControlName="officesId" [label]="'labelOffice'" [name]="'office'"
+									[endpoint]="'/api/ComboBoxGeneral/GetOffices'">
+								</app-combobox>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<app-combobox formControlName="arlId" [label]="'labelArl'" [name]="'arl'"
+									[endpoint]="'/api/ComboBoxGeneral/GetArl'">
+								</app-combobox>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<app-combobox formControlName="epsId" [label]="'labelEps'" [name]="'eps'"
+									[endpoint]="'/api/ComboBoxGeneral/GetEps'">
+								</app-combobox>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="form-control-label">Correo Electronico (Usuario Sigga Movil)</label>
+								<input type="text" formControlName="email" class="form-control"
+									placeholder="Correo Electronico">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<div class="custom-control custom-checkbox">
+									<input id="autorizador"
+										[(ngModel)]="isAuthorizer"
+										formControlName="isAuthorizer"
+										class="custom-control-input"
+										type="checkbox" [checked]="isAuthorizer"
+										(click)="enableAuthorizer()">
+									<label class="custom-control-label" for="autorizador">{{(isAuthorizer) ? 'Es Autorizador' : 'No es Autorizador'}}</label>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="form-control-label">&nbsp;</label>
+								<button class="btn btn-primary pull-right" [disabled]="!frmEditEmployee.valid || saving"
+									(click)="editEmpleado()">{{"viewEmpleado" | localization : btnCreateEmployee}}</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

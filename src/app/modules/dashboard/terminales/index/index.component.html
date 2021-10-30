@@ -1,0 +1,14 @@
+<app-inner-header [modulo]="'labelTerminals'" [background]="'bg-misterminales'"></app-inner-header>
+<div class="container-fluid mt--6">
+	<div class="row">
+		<div class="col-lg-4" *ngIf="state.name !== 'createterminal'">
+			<app-card-list-terminales></app-card-list-terminales>
+		</div>
+		<div class="col-lg-4" *ngIf="state.name === 'createterminal'">
+			<app-card-add-userterminal></app-card-add-userterminal>
+		</div>
+		<div class="col-lg-8">
+			<app-card-list-modules></app-card-list-modules>
+		</div>
+	</div>
+</div>

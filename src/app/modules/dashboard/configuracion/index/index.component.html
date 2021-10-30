@@ -1,0 +1,67 @@
+<app-inner-header [modulo]="'labelConfig'" [background]="'bg-misterminales'"></app-inner-header>
+<div class="container-fluid mt--6">
+	<div class="row">
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+			<app-card-crud
+				[title]="'EPS'"
+				[subtitle]="'Gestiona tus EPS'"
+				[endpoint]="'/api/Eps/All'"
+				[service]="'/api/Eps'"
+				[hasHeadquarter]="false"
+				[prefix]="'eps'">
+			</app-card-crud>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+			<app-card-crud
+				[title]="'ARL'"
+				[subtitle]="'Gestiona tus ARL'"
+				[endpoint]="'/api/Arl/All'"
+				[service]="'/api/Arl'"
+				[hasHeadquarter]="false"
+				[prefix]="'arl'">
+			</app-card-crud>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+			<app-card-crud
+				[title]="'Estados'"
+				[subtitle]="'Gestiona tus estados'"
+				[endpoint]="'/api/TypesStatus/All'"
+				[service]="'/api/TypesStatus'"
+				[hasHeadquarter]="false"
+				[prefix]="'states'">
+			</app-card-crud>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+			<app-card-crud
+				[title]="'Actividades'"
+				[subtitle]="'Gestiona tus actividades'"
+				[endpoint]="'/api/TypesActivities/All'"
+				[service]="'/api/TypesActivities'"
+				[hasHeadquarter]="false"
+				[prefix]="'act'">
+			</app-card-crud>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+			<app-card-crud
+				[title]="'Cargos'"
+				[subtitle]="'Gestiona tus cargos'"
+				[endpoint]="'/api/TypesCharges/All'"
+				[service]="'/api/TypesCharges'"
+				[hasHeadquarter]="false"
+				[prefix]="'charges'">
+			</app-card-crud>
+		</div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+			<app-card-crud
+				[title]="'Rutas'"
+				[subtitle]="'Gestiona tus rutas'"
+				[endpoint]="'/api/RoutesOfTransport/All'"
+				[service]="'/api/RoutesOfTransport'"
+				[hasHeadquarter]="true"
+				[prefix]="'routes'">
+			</app-card-crud>
+		</div>
+	</div>
+</div>
