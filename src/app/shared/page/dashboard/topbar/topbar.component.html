@@ -28,12 +28,12 @@
 					</a>
 					<div class="dropdown-menu dropdown-menu-right" [class.show]="showFloatMenu">
 						<div class="dropdown-header noti-title">
-							<h6 class="text-overflow m-0">Menu</h6>
+							<h6 class="text-overflow m-0">Menu SIGGA</h6>
 						</div>
-						<a [routerLink]="['/dashboard/home/perfil']" class="dropdown-item">
+						<!-- <a [routerLink]="['/dashboard/home/perfil']" class="dropdown-item">
 							<i class="ni ni-single-02"></i>
 							<span>Mi Perfil</span>
-						</a>
+						</a> -->
 						<a href="javascript:" (click)="setSede(item?.id, item?.prop)" *ngFor="let item of sedesAdmin" class="dropdown-item">
 							<i class="ni ni-building"></i>
 							<span>{{item?.prop}}</span>

@@ -101,9 +101,8 @@
 										[(ngModel)]="isAuthorizer"
 										formControlName="isAuthorizer"
 										class="custom-control-input"
-										type="checkbox" [checked]="isAuthorizer"
-										(click)="enableAuthorizer()">
-									<label class="custom-control-label" for="autorizador">{{(isAuthorizer) ? 'Es Autorizador' : 'No es Autorizador'}}</label>
+										type="checkbox" [checked]="isAuthorizer">
+									<label (click)="enableAuthorizer()" class="custom-control-label" for="autorizador">{{(isAuthorizer) ? 'Es Autorizador' : 'No es Autorizador'}}</label>
 								</div>
 							</div>
 						</div>

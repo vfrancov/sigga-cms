@@ -55,7 +55,7 @@ export class CardEditEmpleadoComponent implements OnInit {
 			officesId: new FormControl('', [Validators.required]),
 			arlId: new FormControl('', [Validators.required]),
 			epsId: new FormControl('', [Validators.required]),
-			isAuthorizer: new FormControl('', [Validators.required]),
+			isAuthorizer: new FormControl(0, [Validators.required]),
 			StatusId: new FormControl(1, [])
 		});
 	}
@@ -72,8 +72,8 @@ export class CardEditEmpleadoComponent implements OnInit {
 			this.frmEditEmployee.controls.phoneNumber.setValue(data.payload.phoneNumber);
 			this.frmEditEmployee.controls.officesId.setValue(data.payload.officeId);
 			this.frmEditEmployee.controls.arlId.setValue(data.payload.arlId);
-			this.frmEditEmployee.controls.epsId.setValue(data.payload.epslId);
-			this.frmEditEmployee.controls.isAuthorizer.setValue((this.isAuthorizer) ? 1 : 0);
+			this.frmEditEmployee.controls.epsId.setValue(data.payload.epsId);
+			this.frmEditEmployee.controls.isAuthorizer.setValue(data.payload.isAuthorizer);
 		});
 	}
 

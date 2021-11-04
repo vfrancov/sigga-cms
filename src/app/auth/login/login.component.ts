@@ -36,8 +36,8 @@ export class LoginComponent implements OnInit {
 
   initializeForm() {
     this.frmAuthSigga = this.formBuilder.group({
-      username: ['v.franco@sigga.com.co', [Validators.required, Validators.email]],
-      password: ['davb2882D&%', Validators.required]
+      username: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
     });
   }
 

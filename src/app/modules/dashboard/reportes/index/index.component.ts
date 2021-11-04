@@ -169,7 +169,7 @@ export class IndexReportesComponent implements OnInit {
     });
 
     let request = {
-      page: 0,
+      page: page,
       rows: 10,
       download: false,
       filter: getFilters,

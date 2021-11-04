@@ -102,7 +102,7 @@ export class CardListEmpleadosComponent implements OnInit {
 				officeName: '',
 				officeId: 0,
 				arlId: 0,
-				epslId: 0,
+				epsId: 0,
 				isAuthorizer: 0
 			},
 			card: 'detailEmpleados'
@@ -140,14 +140,16 @@ export class CardListEmpleadosComponent implements OnInit {
 			address: record.address,
 			arlId: record.arlId,
 			email: record.email,
-			epsId: record.epslId,
+			epsId: record.epsId,
 			fname: record.firstName,
 			isAuthorizer: record.isAuthorizer,
 			lname: record.lastName,
 			numDocument: record.numDocument,
 			officesId: record.officeId,
 			phoneNumber: record.phoneNumber,
-			typeDocumentsId: record.typeDocumentsId
+			typeDocumentsId: record.typeDocumentsId,
+      isResidential : 0,
+      isFloating: 0
 		}
 
 		this.employee.updateEmployee(request, this.selectedToDelete).subscribe((response) => {

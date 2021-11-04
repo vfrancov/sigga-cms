@@ -1,15 +1,17 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { statusCode } from '@app/core/constants/status.responses';
 import { DataEmployee } from '@app/core/models/domains/employee.interface';
 import { HeadQuarter } from '@app/core/models/domains/headquarter.response';
 import { CONTROL } from '@app/core/models/enums/buttons';
 import { EmployeesService, SedesService } from '@app/core/services/dashboard';
+import { LocalstorageService } from '@app/core/services/storage/localstorage.service';
 import { CardState } from '@app/stores/card/app.card.state';
 import { reloadList } from '@app/stores/card/card.actions';
 import { Store } from '@ngrx/store';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { UserInfo } from 'os';
 
 @Component({
   selector: 'app-card-modal-control',
@@ -29,6 +31,7 @@ export class CardModalControlComponent implements OnInit {
   dropdownSettings: IDropdownSettings = {};
   btnCreateControlUser: string = CONTROL.BUTTON_CREATE;
   creating: boolean = false;
+  residential: boolean = false;
 
   error: any;
   response: any;
@@ -37,6 +40,7 @@ export class CardModalControlComponent implements OnInit {
     private sedes: SedesService,
     private formbuilder: FormBuilder,
     private employe: EmployeesService,
+    private storage: LocalstorageService,
     private store: Store<CardState>
   ) { }
 
@@ -44,6 +48,7 @@ export class CardModalControlComponent implements OnInit {
     this.checkState();
     this.getSedes();
     this.initializeForm(this.data);
+    this.isUserCompany();
 
     this.dropdownSettings = {
       singleSelection: false,
@@ -71,7 +76,7 @@ export class CardModalControlComponent implements OnInit {
       passtwo: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
       isUserAdmin: [false],
       isResidential: [false]
-    });
+    }, { validators: this.validatePasswordEqual });
   }
 
   getSedes() {
@@ -155,5 +160,16 @@ export class CardModalControlComponent implements OnInit {
     });
 
     return elements;
+  }
+
+  isUserCompany(): void {
+    const user = this.storage.getData('us');
+
+    if (!user?.isResidential)
+      this.residential = true;
+  }
+
+  validatePasswordEqual(formControl: AbstractControl): { match: boolean } {
+    return formControl.get('passone').value === formControl.get('passtwo').value ? null : { match: true };
   }
 }

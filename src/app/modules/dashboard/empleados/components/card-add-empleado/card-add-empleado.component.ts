@@ -87,6 +87,6 @@ export class CardAddEmpleadoComponent implements OnInit {
 	}
 
 	enableAuthorizer() {
-		console.log('here');
+		this.isAuthorizer = !this.isAuthorizer;
 	}
 }
