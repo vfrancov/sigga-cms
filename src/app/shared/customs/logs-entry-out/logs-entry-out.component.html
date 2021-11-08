@@ -72,7 +72,7 @@
 						<strong>{{row.temperature}}</strong>
 					</td>
 					<td class="budget">
-						<span class="badge badge-success">{{ (row.symptoms === 'False') ? 'No' : 'Si'}}</span>
+						<span class="badge badge-success">{{ (row.symptoms) ? 'Si' : 'No'}}</span>
 					</td>
 					<td class="budget">
 						{{row.nameSedes}}
@@ -131,7 +131,7 @@
 						<strong>{{row.temperature}}</strong>
 					</td>
 					<td class="budget">
-						<span class="badge badge-success">{{ (row.symptoms === 'False') ? 'No' : 'Si'}}</span>
+						<span class="badge badge-success">{{ (row.symptoms) ? 'Si' : 'No'}}</span>
 					</td>
 					<td class="budget">
 						{{row.nameTowers}}
@@ -182,7 +182,7 @@
 						{{row.temperature}}
 					</td>
 					<td class="budget">
-						<span class="badge badge-success">{{ (row.symptoms === 'False') ? 'No' : 'Si'}}</span>
+						<span class="badge badge-success">{{ (row.symptoms) ? 'Si' : 'No'}}</span>
 					</td>
 					<td class="budget">
 						{{row.nameArl}}

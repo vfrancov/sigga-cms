@@ -91,16 +91,22 @@ export class IndexReportesComponent implements OnInit {
   exportExcel() {
     this.buttonDownload = 'Descargando ...';
     let totalRecords = 0;
+    let filters = [];
 
     totalRecords = this.storage.getData('records');
+    filters = this.storage.getData('filter');
 
     if(totalRecords === null || totalRecords === undefined)
+      return;
+
+    if(filters === null || totalRecords === undefined)
       return;
 
     let request = {
       page: 0,
       rows: totalRecords,
       download: true,
+      filters: filters,
       sort: [{ field: "entryAt", dir: "desc" }],
       order: "desc"
     }
@@ -110,6 +116,7 @@ export class IndexReportesComponent implements OnInit {
       this.fileName = response.body.fileName.split('/')[5];
       this.downloadFile();
       this.buttonDownload = 'Exportar a Excel';
+      this.records = parseInt(response.body.records);
 
     }, (error: HttpErrorResponse) => {
       this.buttonDownload = 'Exportar a Excel';
@@ -193,6 +200,8 @@ export class IndexReportesComponent implements OnInit {
       }
     });
 
+    this.storage.setData('filter', getFilters);
+
     let request = {
       page: page - 1,
       rows: 10,
@@ -207,6 +216,7 @@ export class IndexReportesComponent implements OnInit {
     this.reports.general(request).subscribe((response) => {
       this.rowData = response.body.list;
       this.loading = false;
+      this.records = parseInt(response.body.records);
     }, (error: HttpErrorResponse) => {
       this.error = error;
       this.loading = false;

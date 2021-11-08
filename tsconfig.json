@@ -5,25 +5,28 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "paths": {
-			"@app/*": [
-				"src/app/*"
-			],
-			"@core/*": [
-				"src/core/*"
-			],
-			"@shared/*": [
-				"src/app/shared/components/*"
-			],
-			"@enviroment/*": [
-				"src/app/enviroments/*"
-			]
-		},
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@core/*": [
+        "src/core/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/components/*"
+      ],
+      "@enviroment/*": [
+        "src/app/enviroments/*"
+      ]
+    },
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "target": "es2015",
     "module": "es2020",
     "lib": [
