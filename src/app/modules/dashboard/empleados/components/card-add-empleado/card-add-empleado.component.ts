@@ -19,6 +19,7 @@ export class CardAddEmpleadoComponent implements OnInit {
 
 	frmCreateEmployee: FormGroupTypeSafe<FormEmployee>;
 	isAuthorizer: boolean = false;
+  isFloatingToggle: boolean = false;
 	response: any;
 	saving: boolean = true;
 
@@ -47,6 +48,7 @@ export class CardAddEmpleadoComponent implements OnInit {
 			arlId: new FormControl(0, [Validators.required]),
 			epsId: new FormControl(0, [Validators.required]),
 			isAuthorizer: new FormControl(0, [Validators.required]),
+      isFloating: new FormControl(0),
 			StatusId: new FormControl(0, [])
 		});
 	}
@@ -55,6 +57,7 @@ export class CardAddEmpleadoComponent implements OnInit {
 		this.btnCreateEmployee = EMPLEADOS.BUTTON_PROGRESS;
 		this.saving = true;
 		this.setIsAuthorizer();
+    this.setIsFloating();
 
 		this.employee.createEmployee(this.frmCreateEmployee.value).subscribe((response) => {
 			if (response.status === statusCode.CREATE)
@@ -78,6 +81,13 @@ export class CardAddEmpleadoComponent implements OnInit {
 			this.frmCreateEmployee.controls.isAuthorizer.setValue(0);
 	}
 
+  setIsFloating() {
+    if(this.isFloatingToggle)
+      this.frmCreateEmployee.controls.isFloating.setValue(1);
+    else
+      this.frmCreateEmployee.controls.isFloating.setValue(0);
+  }
+
 	reloadListEmployee() {
 		this.store.dispatch(reloadList({ status: true, card: '' }))
 	}
@@ -89,4 +99,8 @@ export class CardAddEmpleadoComponent implements OnInit {
 	enableAuthorizer() {
 		this.isAuthorizer = !this.isAuthorizer;
 	}
+
+  enableFloating(): void {
+    this.isFloatingToggle = !this.isFloatingToggle;
+  }
 }

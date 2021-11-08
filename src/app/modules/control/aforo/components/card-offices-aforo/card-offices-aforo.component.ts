@@ -28,7 +28,7 @@ export class CardOfficesAforoComponent implements OnInit {
 	}
 
 	getDataAforo() {
-		this.reportes.aforo({ page: 0, rows: 100, download: true }).subscribe((response) => {
+		this.reportes.aforo({ page: 0, rows: 1000, download: false }).subscribe((response) => {
 			if (response.status === statusCode.SUCCESS) {
 				this.dataAforo = response.body.list;
 				this.getAforoTotals(this.dataAforo);

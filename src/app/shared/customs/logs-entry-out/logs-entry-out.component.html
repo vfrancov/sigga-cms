@@ -69,7 +69,7 @@
 						</ng-template>
 					</td>
 					<td class="budget">
-						<strong>{{row.temperature}}</strong>
+						<strong>{{(row.temperature === '0') ? 'N/A' : row.temperature}}</strong>
 					</td>
 					<td class="budget">
 						<span class="badge badge-success">{{ (row.symptoms) ? 'Si' : 'No'}}</span>

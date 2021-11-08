@@ -83,7 +83,8 @@ export interface FormEmployee {
   arlId: number,
   epsId: number,
   isAuthorizer: number,
-  StatusId: number
+  StatusId: number,
+  isFloating?: number
 }
 
 export interface FilterEmployee {

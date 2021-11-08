@@ -94,7 +94,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-6 d-flex">
 							<div class="form-group">
 								<div class="custom-control custom-checkbox">
 									<input id="autorizador"
@@ -105,6 +105,12 @@
 									<label (click)="enableAuthorizer()" class="custom-control-label" for="autorizador">{{(isAuthorizer) ? 'Es Autorizador' : 'No es Autorizador'}}</label>
 								</div>
 							</div>
+              <div class="form-group ml-1">
+                <div class="custom-control custom-checkbox">
+                  <input id="flotante" type="checkbox" class="custom-control-input">
+                  <label for="flotante" class="custom-control-label" (click)="enableFloating()">{{(isFloatingToggle) ? 'Es Flotante' : 'No es Flotante'}}</label>
+                </div>
+              </div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">

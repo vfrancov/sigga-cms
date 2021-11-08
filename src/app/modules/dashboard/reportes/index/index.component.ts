@@ -104,7 +104,7 @@ export class IndexReportesComponent implements OnInit {
 
     let request = {
       page: 0,
-      rows: totalRecords,
+      rows: this.records,
       download: true,
       filters: filters,
       sort: [{ field: "entryAt", dir: "desc" }],
