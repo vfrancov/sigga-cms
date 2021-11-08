@@ -109,7 +109,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="form-control-label">&nbsp;</label>
-								<button class="btn btn-primary pull-right" [disabled]="!frmCreateEmployee.valid" (click)="createEmpleado()">{{"viewEmpleado" | localization : btnCreateEmployee}}</button>
+								<button class="btn btn-primary pull-right" [disabled]="!frmCreateEmployee.valid || btnCreateEmployee === 'actionCreatingEmpleado'" (click)="createEmpleado()">{{"viewEmpleado" | localization : btnCreateEmployee}}</button>
 							</div>
 						</div>
 					</div>

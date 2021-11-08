@@ -5,7 +5,7 @@ export enum Authentication {
 
 export enum EMPLEADOS {
 	BUTTON_CREATE = 'actionCreateEmpleado',
-	BUTTON_PROGRESS = 'Registrando ...',
+	BUTTON_PROGRESS = 'actionCreatingEmpleado',
 	BUTTON_EDIT = 'actionUpdateEmpleado',
 	BUTTON_PROGRESS_UPDATE = 'Actualizando ...'
 }
@@ -13,6 +13,8 @@ export enum EMPLEADOS {
 export enum CONTROL {
 	BUTTON_CREATE = 'Registrar Usuario',
 	BUTTON_PROGRESS = 'Registrando ...',
+  BUTTON_DISABLE = 'Deshabilitar Usuario',
+  BUTTON_DISABLE_PROGRESS = 'Deshabilitando ...'
 }
 
 export enum SEDES {

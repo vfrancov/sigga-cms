@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Combo } from '@app/core/models/domains/combo.interface';
 import { EmployeesService, ReportesService } from '@app/core/services/dashboard';
+import { LocalstorageService } from '@app/core/services/storage/localstorage.service';
 import { LazyLoadEvent } from 'primeng/api';
 @Component({
   selector: 'app-index',
@@ -33,8 +34,10 @@ export class IndexReportesComponent implements OnInit {
   comboSedes: Combo[];
   selectedOffice: string[];
   selectedSede: string[];
+  rangeDatesExit: any;
+  rangeDatesEntry: any;
 
-  constructor(private reports: ReportesService, private employee: EmployeesService) { }
+  constructor(private reports: ReportesService, private employee: EmployeesService, private storage: LocalstorageService) { }
 
   ngOnInit() {
     this.cols = [
@@ -78,6 +81,7 @@ export class IndexReportesComponent implements OnInit {
       this.records = parseInt(response.body.records);
       this.rows = this.records;
       this.loading = false;
+      this.storage.setData('records', Number(response.body.records));
     }, (error: HttpErrorResponse) => {
       this.error = error;
       this.loading = false;
@@ -86,11 +90,19 @@ export class IndexReportesComponent implements OnInit {
 
   exportExcel() {
     this.buttonDownload = 'Descargando ...';
+    let totalRecords = 0;
+
+    totalRecords = this.storage.getData('records');
+
+    if(totalRecords === null || totalRecords === undefined)
+      return;
 
     let request = {
       page: 0,
-      rows: 0,
-      download: true
+      rows: totalRecords,
+      download: true,
+      sort: [{ field: "entryAt", dir: "desc" }],
+      order: "desc"
     }
 
     this.reports.general(request).subscribe((response) => {
@@ -135,6 +147,10 @@ export class IndexReportesComponent implements OnInit {
     }
   }
 
+  addZero(number: number): string {
+    return (number < 10) ? `0${number.toString()}` : number.toString();
+  }
+
   currentPage(page, filters: LazyLoadEvent) {
     if (Object.keys(filters.filters).length === 0)
       return;
@@ -144,19 +160,28 @@ export class IndexReportesComponent implements OnInit {
     Object.keys(filters.filters).forEach((prop, index) => {
       if (filters.filters[prop][0].value !== null) {
         let value = filters.filters[prop][0].value;
-        let dateValue = new Date(value);
-        let resultDate = '';
-        console.log(value);
 
-        if (value instanceof Date) {
-          console.log('here');
-          resultDate = `${dateValue.getFullYear().toString()}-${dateValue.getMonth() + 1}-${dateValue.getDate()} 00:00:00`;
-          getFilters.push({
-            "field": prop,
-            "operator": "gte",
-            "value": resultDate,
-            "logic": "and"
+        let operatorsRangeFilter = ['gte', 'lte'];
+        let hoursFilter = ['00:00:00', '23:59:59'];
+
+        if (value.length > 1) {
+          let dateString: Array<Date> = value.map((date, index) => {
+            if (date !== null) {
+              return `${date.getFullYear().toString()}-${date.getMonth() + 1}-${this.addZero(date.getDate())} ${hoursFilter[index]}`;
+            }
           });
+
+          dateString.forEach((filterDate, index) => {
+            if(filterDate === undefined)
+              return;
+
+            getFilters.push({
+              "field": prop,
+              "operator": operatorsRangeFilter[index],
+              "value": filterDate,
+              "logic": "and"
+            })
+          })
         } else {
           getFilters.push({
             "field": prop,
@@ -169,7 +194,7 @@ export class IndexReportesComponent implements OnInit {
     });
 
     let request = {
-      page: page,
+      page: page - 1,
       rows: 10,
       download: false,
       filter: getFilters,

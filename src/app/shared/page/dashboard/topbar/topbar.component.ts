@@ -63,6 +63,7 @@ export class TopbarComponent implements OnInit {
 
 	logout() {
 		this.storage.removeData('us');
+    this.storage.removeData('records');
     this.storage.removeData('IdSede');
 		this.router.navigate(['/']);
 	}

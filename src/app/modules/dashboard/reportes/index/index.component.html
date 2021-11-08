@@ -22,6 +22,13 @@
                     class="fa fa-file-excel"></i> {{buttonDownload}}</button>
               </div>
             </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr>
+                <td [attr.colspan]="columns.length" class="text-center">
+                   No se encontraron registros para su consulta
+                </td>
+              </tr>
+            </ng-template>
             <ng-template pTemplate="header">
               <tr>
                 <th>
@@ -101,7 +108,7 @@
                     Entrada
                     <p-columnFilter type="text" field="entryAt" display="menu">
                       <ng-template pTemplate="filter" let-filter="filterCallback">
-                        <p-calendar (onSelect)="filter($event)" dateFormat="yy-mm-dd" selectionMode="range"></p-calendar>
+                        <p-calendar [(ngModel)]="rangeDatesEntry" (onSelect)="filter(rangeDatesEntry, 'release_datetime', 'dateRangeFilter')" dateFormat="yy-mm-dd" selectionMode="range"></p-calendar>
                       </ng-template>
                     </p-columnFilter>
                   </div>
@@ -111,7 +118,7 @@
                     Salida
                     <p-columnFilter type="text" field="exitAt" display="menu">
                       <ng-template pTemplate="filter" let-filter="filterCallback">
-                        <p-calendar (onSelect)="filter($event)" dateFormat="yy-mm-dd" selectionMode="range"></p-calendar>
+                        <p-calendar [(ngModel)]="rangeDatesEntry" (onSelect)="filter(rangeDatesEntry, 'release_datetime', 'dateRangeFilter')" dateFormat="yy-mm-dd" selectionMode="range"></p-calendar>
                       </ng-template>
                     </p-columnFilter>
                   </div>

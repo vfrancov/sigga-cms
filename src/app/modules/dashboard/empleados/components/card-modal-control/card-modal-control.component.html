@@ -15,7 +15,7 @@
 			<div class="modal-body">
 				<div class="row">
 					<div class="col-lg-12">
-						<app-alert [error]="error" [response]="response"></app-alert>
+						<app-alert [error]="error" [response]="response" [hidden]="hideResponse"></app-alert>
 						<form [formGroup]="frmAddControlUser">
 							<div class="form-group">
 								<label class="form-control-label">Usuario</label>
@@ -58,7 +58,12 @@
 							<div class="row">
 								<div class="col-lg-6"></div>
 								<div class="col-lg-6 text-right">
-									<button class="btn btn-primary" [disabled]="!frmAddControlUser.valid || creating" (click)="createUserControl()">{{btnCreateControlUser}}</button>
+                  <ng-container *ngIf="data.isUserControl === 1; else createUserControl">
+                    <button class="btn btn-primary" [disabled]="!frmAddControlUser.valid || creating" (click)="createUserControl()">{{btnDisableControlUser}}</button>
+                  </ng-container>
+                  <ng-template #createUserControl>
+                    <button class="btn btn-primary" [disabled]="!frmAddControlUser.valid || creating" (click)="createUserControl()">{{btnCreateControlUser}}</button>
+                  </ng-template>
 								</div>
 							</div>
 						</form>

@@ -12,6 +12,7 @@ import { reloadList } from '@app/stores/card/card.actions';
 import { Store } from '@ngrx/store';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { UserInfo } from 'os';
+import { asyncScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-card-modal-control',
@@ -30,8 +31,10 @@ export class CardModalControlComponent implements OnInit {
   selectedItems: Array<HeadQuarter> = [];
   dropdownSettings: IDropdownSettings = {};
   btnCreateControlUser: string = CONTROL.BUTTON_CREATE;
+  btnDisableControlUser: string = CONTROL.BUTTON_DISABLE;
   creating: boolean = false;
   residential: boolean = false;
+  hideResponse: boolean = false;
 
   error: any;
   response: any;
@@ -64,6 +67,7 @@ export class CardModalControlComponent implements OnInit {
 
   checkState() {
     this.store.select('showDetailsEmployee').subscribe(data => {
+      console.log(data.payload);
       this.initializeForm(data.payload);
     });
   }
@@ -133,6 +137,7 @@ export class CardModalControlComponent implements OnInit {
                 this.response = response;
 
               this.response = response;
+              asyncScheduler.schedule(() => this.hideResponse = true, 2500);
             }, (error: HttpErrorResponse) => {
               this.error = error;
             });
@@ -153,13 +158,7 @@ export class CardModalControlComponent implements OnInit {
   }
 
   getSelectedSedes(sedes: Array<HeadQuarter>): Array<any> {
-    let elements = [];
-
-    sedes.forEach(element => {
-      elements.push(element.id);
-    });
-
-    return elements;
+    return sedes.map(element => element.id);
   }
 
   isUserCompany(): void {

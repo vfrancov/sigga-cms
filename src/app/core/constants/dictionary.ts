@@ -47,7 +47,8 @@ export const Dictionary = {
       "labelGraphics" : "Mis Graficas",
       "labelTutos" : "Tutoriales",
       "labelAforo" : "Mi Aforo",
-      "labelTracking" : "Tracking"
+      "labelTracking" : "Tracking",
+      "actionCreatingEmpleado" : 'Registrando ...'
     },
     "viewOficina": {
       "labelTitleDetail": "Mis Oficinas",
@@ -131,7 +132,8 @@ export const Dictionary = {
       "labelGraphics" : "Mis Graficas",
       "labelTutos" : "Tutoriales",
       "labelAforo" : "Mi Aforo",
-      "labelTracking" : "Tracking"
+      "labelTracking" : "Tracking",
+      "actionCreatingEmpleado" : 'Registrando ...'
     },
     "viewOficina": {
       "labelTitleDetail": "Mi Unidad",
