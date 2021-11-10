@@ -29,6 +29,7 @@ export interface DataEmployee {
   epsId: number,
   isAuthorizer: number
   isUserControl?: number,
+  isFloating?:number,
   rolId?: number
 }
 

@@ -1,6 +1,7 @@
-import { ReloadList, ShowCardContratistas } from '@app/core/models/domains/contratistas.interface';
+import { MemberDetails, ReloadList, ShowCardContratistas } from '@app/core/models/domains/contratistas.interface';
 
 export interface ContratistaState {
 	contratistas: ShowCardContratistas,
-	reload: ReloadList
+	reload: ReloadList,
+  setContratista: MemberDetails
 }

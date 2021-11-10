@@ -7,6 +7,7 @@ import {
 	ResumeSedes,
 	Update
 } from '@app/core/models/domains/card.interface';
+import { MemberDetails } from '@app/core/models/domains/contratistas.interface';
 import { CardOffices } from '@app/core/models/domains/office.interface';
 
 export interface CardState {
@@ -18,5 +19,6 @@ export interface CardState {
 	showCompanyEdit: EditCompany
 	showDetailsEmployee: DetailEmployee,
 	upCompany: Update,
-	cardOffices: CardOffices
+	cardOffices: CardOffices,
+  contratista: MemberDetails
 }

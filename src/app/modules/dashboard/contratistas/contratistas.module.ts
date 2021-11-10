@@ -15,6 +15,9 @@ import { contratistasRoutes } from './contratistas.routing';
 import { IndexContratistasComponent } from './index/index.component';
 import { CardVisitContratistasComponent } from './components/card-visit-contratistas/card-visit-contratistas.component';
 import { CardIoContratistasComponent } from './components/card-io-contratistas/card-io.component';
+import { CardModalContratistaComponent } from './components/card-modal-control/card-modal-control.component';
+import { PipesModule } from '@app/core/pipes/pipes.module';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
 	declarations: [
@@ -27,7 +30,8 @@ import { CardIoContratistasComponent } from './components/card-io-contratistas/c
 		CardEditContratistaComponent,
 		CardAddMemberComponent,
 		CardVisitContratistasComponent,
-		CardIoContratistasComponent
+		CardIoContratistasComponent,
+    CardModalContratistaComponent
 	],
 	imports: [
 		CommonModule,
@@ -35,7 +39,9 @@ import { CardIoContratistasComponent } from './components/card-io-contratistas/c
 		FormsModule,
 		SharedModule,
 		CustomsModule,
-		RouterModule.forChild(contratistasRoutes)
+    PipesModule,
+		RouterModule.forChild(contratistasRoutes),
+    NgMultiSelectDropDownModule.forRoot()
 	]
 })
 export class ContratistasModule { }

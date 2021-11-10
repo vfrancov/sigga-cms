@@ -1,73 +1,78 @@
 <div class="card">
-	<div class="card-header">
-		<div class="row align-items-center">
-			<div class="col">
-				<h5 class="h3 mb-0">Mis Contratistas</h5>
-				<small class="text-muted"><i class="fa fa-info"></i> Relación de tus contratistas.</small>
-			</div>
-			<div class="col text-right">
-				<button class="btn btn-info btn-sm"><i class="fa fa-search"></i></button>
-			</div>
-		</div>
-	</div>
-	<div class="card-header py-0 ng-hide">
-		<form [formGroup]="frmSearchMember">
-			<div class="form-group mb-0">
-				<div class="input-group input-group-lg input-group-flush">
-					<div class="input-group-prepend">
-						<div class="input-group-text">
-							<span class="fas fa-search"></span>
-						</div>
-					</div>
-					<input (keyup)="makeSearch($event)" formControlName="search" type="search" class="form-control" placeholder="Buscar">
-				</div>
-			</div>
-		</form>
-	</div>
-	<div class="card-body customScroll" [class.setScroll]="dataMembers.length > 3">
-		<ul class="list-group list-group-flush list my--3">
-			<div *ngIf="dataMembers.length === 0; then showEmpty else showData"></div>
-			<ng-template #showEmpty>
-				<li class="list-group-item px-0" ng-if="contratistas.length == 0">
-					<div class="text-center">No hay registros que mostrar</div>
-				</li>
-			</ng-template>
-			<ng-template #showData>
-				<li class="list-group-item px-0 hover" *ngFor="let row of dataMembers">
-					<div class="row align-items-center" (click)="showOptionsContratista(row)" [hidden]="selectedMemberToDelete === row.id">
-						<div class="col-auto">
-							<a href="javascript:" class="avatar rounded-circle">
-								<img src="./assets/img/contratista.png">
-							</a>
-						</div>
-						<div class="col-lg-6 ml--2">
-							<h4 class="mb-0">
-								<a href="javascript:">{{row.fullName}}</a>
-							</h4>
-							<div class="mt-3">
-								<span class="badge badge-pill badge-primary text-size-13">{{row.epsName}}</span>
-								<span class="badge badge-pill badge-primary text-size-13">{{row.arlName}}</span>
-								<span class="badge badge-pill badge-primary text-size-13">{{row.numDocument}}</span>
-								<!-- <span class="badge badge-pill badge-default text-size-13"><i class="fa fa-qrcode"></i></span> -->
-							</div>
-						</div>
-						<div class="col-lg-4 text-center">
-							<div [hidden]="selectedMember !== row.id">
-								<button type="button" class="btn btn-sm btn-danger" (click)="selectItemContratista(row)">
-									<i class="fa fa-trash"></i>
-								</button>
+  <div class="card-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h5 class="h3 mb-0">Mis Contratistas</h5>
+        <small class="text-muted"><i class="fa fa-info"></i> Relación de tus contratistas.</small>
+      </div>
+      <div class="col text-right">
+        <button class="btn btn-info btn-sm"><i class="fa fa-search"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="card-header py-0 ng-hide">
+    <form [formGroup]="frmSearchMember">
+      <div class="form-group mb-0">
+        <div class="input-group input-group-lg input-group-flush">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <span class="fas fa-search"></span>
+            </div>
+          </div>
+          <input (keyup)="makeSearch($event)" formControlName="search" type="search" class="form-control"
+            placeholder="Buscar">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card-body customScroll" [class.setScroll]="dataMembers.length > 3">
+    <ul class="list-group list-group-flush list my--3">
+      <div *ngIf="dataMembers.length === 0; then showEmpty else showData"></div>
+      <ng-template #showEmpty>
+        <li class="list-group-item px-0" ng-if="contratistas.length == 0">
+          <div class="text-center">No hay registros que mostrar</div>
+        </li>
+      </ng-template>
+      <ng-template #showData>
+        <li class="list-group-item px-0 hover" *ngFor="let row of dataMembers">
+          <div class="row align-items-center" (click)="showOptionsContratista(row)"
+            [hidden]="selectedMemberToDelete === row.id">
+            <div class="col-auto">
+              <a href="javascript:" class="avatar rounded-circle">
+                <img src="./assets/img/contratista.png">
+              </a>
+            </div>
+            <div class="col-lg-6 ml--2">
+              <h4 class="mb-0">
+                <a href="javascript:">{{row.fullName}}</a>
+              </h4>
+              <div class="mt-3">
+                <span class="badge badge-pill badge-primary text-size-13">{{row.epsName}}</span>
+                <span class="badge badge-pill badge-primary text-size-13">{{row.arlName}}</span>
+                <span class="badge badge-pill badge-primary text-size-13">{{row.numDocument}}</span>
+                <!-- <span class="badge badge-pill badge-default text-size-13"><i class="fa fa-qrcode"></i></span> -->
+              </div>
+            </div>
+            <div class="col-lg-4 text-center">
+              <div [hidden]="selectedMember !== row.id">
+                <button type="button" class="btn btn-sm btn-danger" (click)="selectItemContratista(row)">
+                  <i class="fa fa-trash"></i>
+                </button>
 
-								<a href="javascript:" class="btn btn-sm btn-default" (click)="requestDetailsContratista(row)">
-									<i class="fa fa-pen"></i>
-								</a>
+                <a href="javascript:" class="btn btn-sm btn-default" (click)="requestDetailsContratista(row)">
+                  <i class="fa fa-pen"></i>
+                </a>
 
-								<!-- <button type="button" class="btn btn-sm btn-primary tooltip-message" ng-click="startRequest(rows)" data-toggle="tooltip" data-placement="top" title="Gestionar Autorización">
+                <a href="javascript:" class="btn btn-sm btn-primary" (click)="setUserControlContratista(row)">
+                  <i class="fa fa-clipboard-check"></i>
+                </a>
+                <!-- <button type="button" class="btn btn-sm btn-primary tooltip-message" ng-click="startRequest(rows)" data-toggle="tooltip" data-placement="top" title="Gestionar Autorización">
 									<i class="fa fa-file-invoice"></i>
 								</button> -->
-							</div>
-						</div>
-					</div>
-					<!-- <div class="row align-items-center ng-hide" ng-show="selectedIdContratistaQR == rows.id_sg_personal_proveedor">
+              </div>
+            </div>
+          </div>
+          <!-- <div class="row align-items-center ng-hide" ng-show="selectedIdContratistaQR == rows.id_sg_personal_proveedor">
 						<div class="col">
 							<div class="row alert alert-info ng-hide" ng-show="qrurl">
 								<div class="col-12 text-center mb-2">
@@ -126,22 +131,28 @@
 						</div>
 					</div> -->
 
-					<div class="row align-items-center" [hidden]="selectedMemberToDelete !== row.id">
-						<app-alert [error]="response" [response]="response"></app-alert>
-						<div class="col">
-							<div class="row alert alert-danger">
-								<div class="col-12 text-center mb-2"><span class="text-sm">Estas seguro de eliminar este Contratista ?</span></div>
-								<div class="col text-center">
-									<button class="btn btn-sm btn-danger" (click)="deleteContratista(row)">Si, Eliminalo</button>
-								</div>
-								<div class="col text-center">
-									<button class="btn btn-sm btn-warning" (click)="cancelDeleteContratista()">No, Cancelalo</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
-			</ng-template>
-		</ul>
-	</div>
+          <div class="row align-items-center" [hidden]="selectedMemberToDelete !== row.id">
+            <app-alert [error]="response" [response]="response"></app-alert>
+            <div class="col">
+              <div class="row alert alert-danger">
+                <div class="col-12 text-center mb-2"><span class="text-sm">Estas seguro de eliminar este Contratista
+                    ?</span></div>
+                <div class="col text-center">
+                  <button class="btn btn-sm btn-danger" (click)="deleteContratista(row)">Si, Eliminalo</button>
+                </div>
+                <div class="col text-center">
+                  <button class="btn btn-sm btn-warning" (click)="cancelDeleteContratista()">No, Cancelalo</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ng-template>
+    </ul>
+  </div>
 </div>
+<app-card-modal-contratista
+  [showModal]="show"
+  (closeModal)="closeModalControl($event)"
+  [data]="detailMember">
+</app-card-modal-contratista>
