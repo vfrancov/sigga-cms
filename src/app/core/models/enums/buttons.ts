@@ -7,7 +7,7 @@ export enum EMPLEADOS {
 	BUTTON_CREATE = 'actionCreateEmpleado',
 	BUTTON_PROGRESS = 'actionCreatingEmpleado',
 	BUTTON_EDIT = 'actionUpdateEmpleado',
-	BUTTON_PROGRESS_UPDATE = 'Actualizando ...'
+	BUTTON_PROGRESS_UPDATE = 'actionUpdatingEmpleado'
 }
 
 export enum CONTROL {

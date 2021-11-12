@@ -48,7 +48,8 @@ export const Dictionary = {
       "labelTutos" : "Tutoriales",
       "labelAforo" : "Mi Aforo",
       "labelTracking" : "Tracking",
-      "actionCreatingEmpleado" : 'Registrando ...'
+      "actionCreatingEmpleado" : 'Registrando ...',
+      "actionUpdatingEmpleado" : "Actualizando ..."
     },
     "viewOficina": {
       "labelTitleDetail": "Mis Oficinas",
@@ -133,7 +134,8 @@ export const Dictionary = {
       "labelTutos" : "Tutoriales",
       "labelAforo" : "Mi Aforo",
       "labelTracking" : "Tracking",
-      "actionCreatingEmpleado" : 'Registrando ...'
+      "actionCreatingEmpleado" : 'Registrando ...',
+      "actionUpdatingEmpleado" : "Actualizando ..."
     },
     "viewOficina": {
       "labelTitleDetail": "Mi Unidad",

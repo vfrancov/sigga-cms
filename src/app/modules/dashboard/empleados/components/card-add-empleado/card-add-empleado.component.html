@@ -108,7 +108,7 @@
               <div class="form-group ml-1">
                 <div class="custom-control custom-checkbox">
                   <input id="flotante" type="checkbox" class="custom-control-input">
-                  <label for="flotante" class="custom-control-label" (click)="enableFloating()">{{(isFloatingToggle) ? 'Es Flotante' : 'No es Flotante'}}</label>
+                  <label for="flotante" class="custom-control-label" formControlName="isFloating" (click)="enableFloating()">{{(isFloatingToggle) ? 'Es Flotante' : 'No es Flotante'}}</label>
                 </div>
               </div>
 						</div>
