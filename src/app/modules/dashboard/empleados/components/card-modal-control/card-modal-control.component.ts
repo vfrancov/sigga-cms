@@ -35,6 +35,7 @@ export class CardModalControlComponent implements OnInit {
   creating: boolean = false;
   residential: boolean = false;
   hideResponse: boolean = false;
+  clearComponent: boolean =  false;
 
   error: any;
   response: any;
@@ -98,10 +99,7 @@ export class CardModalControlComponent implements OnInit {
   }
 
   onItemSelect(event) {
-    let existElement = this.selectedItems.some(element => element.id === event.id);
-
-    if (!existElement)
-      this.selectedItems.push(event);
+    this.selectedItems = [...event];
   }
 
   onItemDeselect(event) {
@@ -132,12 +130,14 @@ export class CardModalControlComponent implements OnInit {
         this.frmAddControlUser.controls['passtwo'].value,
         this.frmAddControlUser.controls['isUserAdmin'].value, isResidential).subscribe((response) => {
           if (response.status === statusCode.SUCCESS) {
-            this.employe.associateSedeControl(this.data.id, this.getSelectedSedes(this.selectedItems)).subscribe((response) => {
+            this.employe.associateSedeControl(this.data.id, this.selectedItems).subscribe((response) => {
               if (response.status === statusCode.SUCCESS)
                 this.response = response;
 
               this.response = response;
               asyncScheduler.schedule(() => this.hideResponse = true, 2500);
+              this.selectedItems = [];
+              this.clearComponent = true;
             }, (error: HttpErrorResponse) => {
               this.error = error;
             });

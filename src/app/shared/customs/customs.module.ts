@@ -11,6 +11,7 @@ import { GraphicsComponent } from './graphics/graphics.component';
 import { InnerHeaderComponent } from './inner-header/inner-header.component';
 import { LogsEntryOutComponent } from './logs-entry-out/logs-entry-out.component';
 import { ModalContainerComponent } from './modal-container/modal-container.component';
+import { MultiselectComponent } from './multiselect/multiselect.component';
 
 @NgModule({
 	declarations: [
@@ -22,7 +23,8 @@ import { ModalContainerComponent } from './modal-container/modal-container.compo
 		LogsEntryOutComponent,
 		GraphicsComponent,
 		DataTablesComponent,
-		ModalContainerComponent
+		ModalContainerComponent,
+    MultiselectComponent
 	],
 	imports: [
 		CommonModule,
@@ -39,7 +41,8 @@ import { ModalContainerComponent } from './modal-container/modal-container.compo
 		LogsEntryOutComponent,
 		GraphicsComponent,
 		DataTablesComponent,
-		ModalContainerComponent
+		ModalContainerComponent,
+    MultiselectComponent
 	]
 })
 export class CustomsModule { }

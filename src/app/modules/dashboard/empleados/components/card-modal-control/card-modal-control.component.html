@@ -43,7 +43,7 @@
 								  </div>
 							</div>
 							<div class="form-group">
-								<label class="form-control-label">Sedes</label>
+								<!-- <label class="form-control-label">Sedes</label>
 								<ng-multiselect-dropdown
 									class="form-control"
 									[placeholder]="'Escoje la sede'"
@@ -53,17 +53,17 @@
 									(onDeSelect)="onItemDeselect($event)"
 									(onDeSelectAll)="onDeselectAll($event)"
 									(onSelectAll)="onSelectAll($event)">
-								</ng-multiselect-dropdown>
+								</ng-multiselect-dropdown> -->
+                <multiselect
+                  [label]="'Escoje las sedes que deseas que administre este usuario.'"
+                  [clear]="clearComponent"
+                  (pushSelectedElements)="onItemSelect($event)"
+                  [elements]="dropdownList"></multiselect>
 							</div>
 							<div class="row">
 								<div class="col-lg-6"></div>
 								<div class="col-lg-6 text-right">
-                  <ng-container *ngIf="data.isUserControl === 1; else createUserControl">
-                    <button class="btn btn-primary" [disabled]="!frmAddControlUser.valid || creating" (click)="createUserControl()">{{btnDisableControlUser}}</button>
-                  </ng-container>
-                  <ng-template #createUserControl>
-                    <button class="btn btn-primary" [disabled]="!frmAddControlUser.valid || creating" (click)="createUserControl()">{{btnCreateControlUser}}</button>
-                  </ng-template>
+                  <button class="btn btn-primary" [disabled]="!frmAddControlUser.valid || creating || selectedItems.length === 0" (click)="createUserControl()">{{btnCreateControlUser}}</button>
 								</div>
 							</div>
 						</form>

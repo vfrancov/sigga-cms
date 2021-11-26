@@ -1,0 +1,44 @@
+.multiselect {
+  $_border_color : #dee2e6;
+  $_font_size: 12px;
+
+  &__container {
+    border: 1px solid $_border_color;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    cursor: pointer;
+    padding: 0.625rem 0.75rem;
+
+    span {
+      font-size: $_font_size;
+    }
+  }
+
+  &__empty-state {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__elements {
+    background-color: #fff;
+    border: 1px solid $_border_color;
+    border-radius: 0.25rem;
+    box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.5);
+    padding: 0.625rem;
+    height: auto;
+    width: 100%;
+    z-index: 1;
+    top: 70px;
+  }
+
+  &__close {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @media (max-height: 768px) {
+    &__elements {
+      top: -194px;
+    }
+  }
+}
